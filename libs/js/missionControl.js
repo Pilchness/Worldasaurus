@@ -1,6 +1,7 @@
 import * as mapsource from './leafletcode/mappingConstants.js';
 import { getCurrentNavCords } from './leafletcode/currentLocation.js';
 import { drawCountryOutline } from './leafletcode/countryOutlines.js';
+import { getListOfPossibleCountries } from './leafletcode/countrySearch.js';
 //import { handleWeatherData } from './weather.js';
 //import { getCountryISOCode } from './getCountryISO.js';
 import { getCountryImage } from './ajax/countryImageSearch.js';
@@ -18,23 +19,46 @@ const countryFocus = (country) => {
 };
 
 mapsource.stadia(); //default map style
-let countryOutlines = L.featureGroup();
 const currentLocation = getCurrentNavCords();
 
 $('#content').html(pageHeader).append(leftMenu);
-let geoData; //parsed geoData JSON array of countries and data
+let parsedGeoDataArray; //parsed geoData JSON array of countries and data
 let countryList; //list of country names
+let possibleMatchesToInput; //list of predicted countries based on letters typed
 
-const generateCountryList = (geodata) => {
-  geoData = geodata;
+const generateCountryList = (parsedGeoDataArray) => {
+  console.log(parsedGeoDataArray);
   //create object of countries from geodata
   let countries = {};
-  for (let i = 0; i < geodata.length; i++) {
-    countries[i] = geodata[i].properties.name.toLowerCase();
+  for (let i = 0; i < parsedGeoDataArray.length; i++) {
+    countries[i] = parsedGeoDataArray[i].properties.name.toLowerCase();
   }
   countryList = countries;
+  return countries;
 };
 
-decodeGeodata().then((geodata) => generateCountryList(geodata));
+decodeGeodata().then((parsedGeoDataArray) => (countryList = generateCountryList(parsedGeoDataArray)));
+// .then((countryList) => getListOfPossibleCountries(countryList));
 
-drawCountryOutline(countryArray, countryNumber);
+//const setInput = (country) => $('#country-search').text(country);
+// $('#jamaica.dropdown').click(function () {
+//   console.log('hello');
+//   setInput($('#dropdown').val());
+// });
+
+//$('#functions').html('goodbye');
+
+$('#country-search').on('input', function () {
+  console.log('searching');
+  //console.log(countryList);
+  const countryMatches = getListOfPossibleCountries(countryList);
+  console.log('matches', countryMatches);
+  const dropdownSuggestions = countryMatches.map((country) => {
+    return `<li><button id="${country}" class="dropdown" onClick="setInputVal(${country})"  value="${country}">${country}</button></li>`;
+  });
+  $('#search-suggestions').html(
+    `<ul style="margin-top: 14px">${dropdownSuggestions.slice(0, 5)}</ul>`.replace(/,/g, '')
+  );
+});
+
+//drawCountryOutline(countryArray, countryNumber);

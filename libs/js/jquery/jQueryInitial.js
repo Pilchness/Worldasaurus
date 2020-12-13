@@ -6,17 +6,17 @@ $(document).ready(function () {
   //     $('#countrySearch').val(getListOfPossibleCountries[0]);
   //   }
   // });
+  console.log('ready');
+  //$('html').keyup(() => countrySearch(getListOfPossibleCountries()));
 
-  $('html').keyup(() => countrySearch(getListOfPossibleCountries()));
-
-  $('#countrySearch').keypress(function (event) {
-    //enter key has same effect as pressing country identify button
-    var keycode = event.keyCode ? event.keyCode : event.which;
-    if (keycode == '13') {
-      countrySearch($('#countrySearch').val().toLowerCase());
-    }
-    event.stopPropagation();
-  });
+  // $('#countrySearch').keypress(function (event) {
+  //   //enter key has same effect as pressing country identify button
+  //   var keycode = event.keyCode ? event.keyCode : event.which;
+  //   if (keycode == '13') {
+  //     countrySearch($('#countrySearch').val().toLowerCase());
+  //   }
+  //   event.stopPropagation();
+  // });
 
   $('#countrySearch').val('').focus(); //resets input box to empty
 

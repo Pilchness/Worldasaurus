@@ -3,8 +3,8 @@ export const leftMenu = () => {
       <ul id="logo-list">
         <li id="options">
           <svg
-            width="6vh"
-            height="6vh"
+            width="50px"
+            height="50px"
             viewBox="0 0 16 16"
             class="bi bi-geo-alt"
             fill="white"
@@ -20,8 +20,8 @@ export const leftMenu = () => {
         </li>
         <li id="info">
           <svg
-            width="6vh"
-            height="6vh"
+            width="50px"
+            height="50px"
             viewBox="0 0 16 16"
             class="bi bi-info-circle"
             fill="white"
@@ -35,8 +35,8 @@ export const leftMenu = () => {
         </li>
         <li id="maptype">
           <svg
-            width="6vh"
-            height="6vh"
+            width="50px"
+            height="50px"
             viewBox="0 0 16 16"
             class="bi bi-map"
             fill="white"
@@ -51,8 +51,8 @@ export const leftMenu = () => {
         </li>
         <li id="weather">
           <svg
-            width="6vh"
-            height="6vh"
+            width="50px"
+            height="50px"
             viewBox="0 0 16 16"
             class="bi bi-sun"
             fill="white"
@@ -68,8 +68,8 @@ export const leftMenu = () => {
         </li>
         <li id="quiz">
           <svg
-            width="6vh"
-            height="6vh"
+            width="50px"
+            height="50px"
             viewBox="0 0 16 16"
             class="bi bi-question-octagon"
             fill="white"

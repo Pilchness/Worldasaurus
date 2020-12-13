@@ -31,6 +31,7 @@
     </title>
   </head>
   <body>
+    <script id="functions">const setInputVal = (data) => $('#country-search').val(data.innerText)</script>
     <div id="preloader">
     </div>
     <div id="mapid">
@@ -42,15 +43,17 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
     </script>
+     <!-- <script type="text/javascript" src="libs/js/jquery/jQueryInitial.js">
+    </script> -->
     <!-- Custom Script -->
-     <script type="application/javascript" src="libs/js/loaderscript.js">
+     <script type="application/javascript" src="libs/js/components/loaderscript.js">
     </script>
     
      <script type="module" src="libs/js/missionControl.js">
     </script>
-    <script type="module" src="libs/js/dataControl.js">
+    <script type="module" src="data/dataControl.js">
     </script>
-     <script type="module" src="libs/js/mappingConstants.js">
+     <script type="module" src="libs/js/leafletcode/mappingConstants.js">
     </script> 
     <script type="module" src="libs/js/leafletcode/currentLocation.js">
     </script>

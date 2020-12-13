@@ -12,6 +12,7 @@ export const pageHeader = () => {
               type="search"
               aria-label="Search"
             />
+            <div id="search-suggestions"></div>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import * as mapsource from './mappingConstants.js';
 
 export const drawCountryOutline = (countryArray, countryNumber) => {
-  const countrycords = countryArray[countryNum].geometry.coordinates;
+  console.log(countryArray[countryNumber]);
+
+  const countrycords = countryArray[countryNumber].geometry.coordinates;
   let countryName = countryArray[countryNumber].name;
   countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1);
   if (countryArray[countryNum].geometry.type === 'Polygon') {

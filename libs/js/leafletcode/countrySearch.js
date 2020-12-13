@@ -1,42 +1,52 @@
-let outlineColour = 'blue'; //default colour
+import * as mapsource from './mappingConstants.js';
+import { drawCountryOutline } from './countryOutlines.js';
 
-const getListOfPossibleCountries = () => {
-  let input = $('#countrySearch').val();
-  const regex = new RegExp(`^${input}`);
-  let countries = [];
-  for (let country in countriesList) {
-    if (regex.test(countriesList[country])) {
-      countries.push(countriesList[country]);
+let outlineColour = 'blue'; //default colour
+//let parsedGeoDataArray = [];
+
+export const getListOfPossibleCountries = (countryList) => {
+  console.log(countryList);
+  //parsedGeoDataArray = geoDataArray;
+  let input = $('#country-search').val().toLowerCase();
+  if (input) {
+    const regex = new RegExp(`^${input}`);
+    let countries = [];
+    for (let country in countryList) {
+      if (regex.test(countryList[country])) {
+        countries.push(countryList[country]);
+      }
     }
-  }
-  if (countries.length === 1) {
-    $('countrySearch').val(countries[0]);
-    countryFocus(countries[0]);
-  } else {
-    outlineColour = 'blue';
-  }
-  return countries;
+    // if (countries.length === 1) {
+    //   $('countrySearch').val(countries[0]);
+    //   countryFocus(countries[0]);
+    // } else {
+    //   outlineColour = 'blue';
+    // }
+    //displayCountries(countries);
+    return countries;
+  } else return [];
 };
 
-const countrySearch = (countries) => {
+const displayCountries = (countries) => {
+  let countryOutlines = L.featureGroup();
   countryOutlines.clearLayers();
-
-  if (countries.length !== Object.keys(countriesList).length) {
+  //console.log(parsedGeoDataArray);
+  if (countries.length !== parsedGeoDataArray.length) {
     for (let i = 0; i < countries.length; i++) {
       let countryFound = false;
       let countryNumber = null;
-      for (let item in countriesList) {
-        if (countriesList[item] === countries[i]) {
+      parsedGeoDataArray.foreach((country) => {
+        if (parsedGeoDataArray[country] === countries[i]) {
           countryFound = true;
           countryNumber = item;
         }
-      }
-      if (countryFound) {
-        drawCountryOutline(countryNumber, countries[i]);
-      } else {
-        console.log(`${countries[i]} was not found.`);
-      }
+        if (countryFound) {
+          drawCountryOutline(countries, countryNumber);
+        } else {
+          console.log(`${countries[i]} was not found.`);
+        }
+      });
+      mapsource.map.fitBounds(countryOutlines.getBounds());
     }
-    mapsource.map.fitBounds(countryOutlines.getBounds());
   }
 };
