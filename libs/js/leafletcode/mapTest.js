@@ -1,15 +1,33 @@
 //Leaflet Map Initiate
 
 export const map = L.map('mapid', {
-  zoomControl: false,
-  scrollWheelZoom: false,
+  //zoomControl: false,
+  //scrollWheelZoom: false,
   dragging: true,
   doubleClickZoom: false,
   boxZoom: false,
-  touchZoom: false
+  renderer: L.canvas
+  //touchZoom: false
 }).setView([51.505, -0.09], 5);
 
-export const layer = L.geoJSON().addTo(map);
+stadia();
+var marker = new L.Marker([17.385044, 78.486671]);
+marker.addTo(map);
+marker.bindPopup('Testing').openPopup();
+// Creating latlng object
+var latlngs = [
+  [17.385044, 78.486671],
+  [16.506174, 80.648015],
+  [17.000538, 81.804034],
+  [17.686816, 83.218482]
+];
+// Creating a poly line
+var polyline = L.polyline(latlngs, { color: 'red' });
+
+// Adding to poly line to map
+polyline.addTo(map);
+
+//export const layer = L.geoJSON().addTo(map);
 // const geojsonFeature = {}
 // L.geoJSON(geojsonFeature).addTo(map);
 // export const geoJSONLayer = () => {
