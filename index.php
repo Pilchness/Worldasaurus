@@ -84,6 +84,10 @@
 <!-- Modals -->
    <script type="module" src="libs/js/modals/modalControl.js">
     </script>
-    <div class="modal info-modal" id="infoModal" tabindex="-1" role="dialog" aria-hidden="true"><div id="info-modal-content"></div></div>
+        <div class="modal settings-modal" id="settings-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="settings-modal-content"></div></div>
+        <div class="modal info-modal" id="info-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="info-modal-content"></div></div>
+        <div class="modal map-modal" id="map-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="map-modal-content"></div></div>
+        <div class="modal weather-modal" id="weather-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="weather-modal-content"></div></div>
+        <div class="modal quiz-modal" id="quiz-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="quiz-modal-content"></div></div>
   </body>
 </html>

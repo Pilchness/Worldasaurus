@@ -17,11 +17,11 @@ export const getCountryImage = (country) => {
           $('#country-image').attr('src', src);
           $('#country-image').attr('alt', alt);
           $('#country-image-title').text(alt);
-          $('#currentloc').text(capitalizeCountryName(country));
+          //$('#currentloc').text(capitalizeCountryName(country));
 
-          addPhotoSourceInformation(result.data[0]);
+          //addPhotoSourceInformation(result.data[0]);
         } else {
-          $('#country-image').attr('src', 'images/fmapthumb.png');
+          $('#country-image').attr('src', 'images/defaultcountry.png');
         }
       }
     },

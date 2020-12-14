@@ -2,7 +2,7 @@ import * as mapsource from '../leafletcode/mappingConstants.js';
 
 const map = mapsource.map;
 
-export const countryOutline = (country, tooltipHTML) => {
+export const addCountryOutline = (country, tooltipHTML) => {
   mapsource.layer.clearLayers();
   const countryOutline = mapsource.layer.addData(country, { style: {} }).bindTooltip(tooltipHTML, {
     permanent: true,
@@ -15,7 +15,6 @@ export const countryOutline = (country, tooltipHTML) => {
   // });
   map.flyToBounds(countryOutline.getBounds(), 14, {
     animate: true,
-    duration: 3,
-    padding: 500
+    duration: 3
   });
 };

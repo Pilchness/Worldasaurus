@@ -6,7 +6,8 @@ export const map = L.map('mapid', {
   dragging: true,
   doubleClickZoom: false,
   boxZoom: false,
-  touchZoom: false
+  touchZoom: false,
+  maxZoom: 10
 }).setView([51.505, -0.09], 5);
 
 export const layer = L.geoJSON().addTo(map);

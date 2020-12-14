@@ -154,7 +154,7 @@ input:focus {
   flex-direction: row;
   background-color: rgba(63, 127, 191, 0.1);
   padding: 10px;
-  width: 460px;
+  width: 480px;
   height: 100px;
 }
 
@@ -237,4 +237,17 @@ input[type='search'] {
 #logo-list {
   margin: 0;
   padding: 0;
+}
+
+td {
+  font-size: 1em;
+  width: 30px;
+}
+
+table {
+  width: 100%;
+}
+
+.modal-body {
+  width: 400px;
 }
