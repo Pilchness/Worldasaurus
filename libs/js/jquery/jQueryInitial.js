@@ -6,7 +6,6 @@ $(document).ready(function () {
   //     $('#countrySearch').val(getListOfPossibleCountries[0]);
   //   }
   // });
-  console.log('ready');
   //$('html').keyup(() => countrySearch(getListOfPossibleCountries()));
 
   // $('#countrySearch').keypress(function (event) {
@@ -18,23 +17,25 @@ $(document).ready(function () {
   //   event.stopPropagation();
   // });
 
-  $('#countrySearch').val('').focus(); //resets input box to empty
+  console.log('ready');
 
-  $('#mapstyle').click(function () {
-    //when change map style button is clicked, change map source
-    try {
-      mapsource[$('#mapprovider').val()]();
-    } catch {
-      mapsource.stadia();
-    }
-  });
+  $('#country-search').val('').focus(); //resets input box to empty
 
-  $('#clear').click(function () {
-    //clears all outlines and resets search box
-    countryOutlines.clearLayers();
-    $('#countrySearch').val('');
-    mapsource.map.setView([51.505, -0.09], 5);
-  });
+  // $('#mapstyle').click(function () {
+  //   //when change map style button is clicked, change map source
+  //   try {
+  //     mapsource[$('#mapprovider').val()]();
+  //   } catch {
+  //     mapsource.stadia();
+  //   }
+  // });
 
-  getCurrentNavCords();
+  // $('#clear').click(function () {
+  //   //clears all outlines and resets search box
+  //   countryOutlines.clearLayers();
+  //   $('#countrySearch').val('');
+  //   mapsource.map.setView([51.505, -0.09], 5);
+  // });
+
+  // getCurrentNavCords();
 });

@@ -15,12 +15,23 @@ let countryList; //object containing country names with numbered keys
 //let possibleMatchesToInput; //list of predicted countries based on letters typed
 
 const countryFocus = (country) => {
-  console.log(country);
+  //$('#search-suggestions').html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`);
+  $('#search-suggestions').hide().html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`).fadeIn(1500);
   //const countryISO = getCountryISOCode(country);
-  layeradd.countryOutline(country);
+  const tooltipHTML = `<figure><h5>${country.properties.name}</h5><p>${country.properties.name}</p></figure>`;
+
+  layeradd.countryOutline(country, tooltipHTML);
   //getCountryImage(country.properties.name.split(' ').join('_'));
   //handleWeatherData(country);
 };
+
+$('body').on('click', function () {
+  for (let j = 0; j < parsedGeoDataArray.length; j++) {
+    if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
+      countryFocus(parsedGeoDataArray[j]);
+    }
+  }
+});
 
 mapsource.stadia(); //default map style
 const currentLocation = getCurrentNavCords();
@@ -54,7 +65,7 @@ $('#country-search').on('input', function () {
     value="${country.properties.name}">${country.properties.name}</button></li>`;
   });
   $('#search-suggestions').html(
-    `<ul style="margin-top: 14px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(/,/g, '')
+    `<ul id="suggestion-list" style="margin-top: 14px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(/,/g, '')
   );
 });
 

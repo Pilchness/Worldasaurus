@@ -38,13 +38,16 @@
     </div>
     <div id="content">
     </div>
+
     <!-- JQuery Script -->
     <script type="application/javascript" src="libs/js/jquery/jqueryv3.5.1.js">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
     </script>
-     <!-- <script type="text/javascript" src="libs/js/jquery/jQueryInitial.js">
-    </script> -->
+    <script type="text/javascript" src="libs/js/jquery/jQueryInitial.js">
+    </script>
+
+
     <!-- Custom Script -->
      <script type="application/javascript" src="libs/js/components/loaderscript.js">
     </script>
@@ -55,20 +58,8 @@
     </script>
      <script type="module" src="libs/js/leafletcode/mappingConstants.js">
     </script> 
-    <!-- <script type="module" src="libs/js/leafletcode/mapTest.js">
-    </script> -->
     
-   
-    <!-- <script type="module" src="libs/js/mapscript.js">
-    </script>
-    <script type="module" src="libs/js/iconControl.js">
-    </script>
-    <script type="module" src="libs/js/optionButtons.js">
-    </script>
-    <script type="module" src="libs/js/quiz.js">
-    </script>
-    <script type="module" src="libs/js/topTens.js">
-    </script> -->
+  
 
 
     <!-- Leaflet Scripts -->
