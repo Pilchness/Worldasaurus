@@ -16,6 +16,6 @@ export const countryOutline = (country, tooltipHTML) => {
   map.flyToBounds(countryOutline.getBounds(), 14, {
     animate: true,
     duration: 3,
-    padding: 50
+    padding: 500
   });
 };

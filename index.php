@@ -27,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href="libs/css/loaderstyles.css" />
     <link rel="stylesheet" type="text/css" href="libs/css/leafletstyles.css" />
     <link rel="stylesheet" type="text/css" href="libs/css/globalstyles.css" />
+    <link rel="stylesheet" type="text/css" href="libs/css/modalstyles.css" />
+
     <title>Worldasaurus
     </title>
   </head>
@@ -45,6 +47,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
     </script>
     <script type="text/javascript" src="libs/js/jquery/jQueryInitial.js">
+    </script>
+      <script type="module" src="libs/js//jquery/iconControl.js">
     </script>
 
 
@@ -77,5 +81,9 @@
             crossorigin="anonymous"
             >
     </script>
+<!-- Modals -->
+   <script type="module" src="libs/js/modals/modalControl.js">
+    </script>
+    <div class="modal info-modal" id="infoModal" tabindex="-1" role="dialog" aria-hidden="true"><div id="info-modal-content"></div></div>
   </body>
 </html>
