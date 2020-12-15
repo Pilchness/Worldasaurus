@@ -1,8 +1,8 @@
 export const weatherModal = () => {
   return `
-  <div class="modal-dialog enterSlowlyLeft animated ml-auto info-modal" role="document">
-    <div class="modal-content info-modal">
-      <div class="modal-content info-modal">
+  <div class="modal-dialog enterSlowlyLeft animated ml-auto weather-modal" role="document">
+    <div class="modal-content weather-modal">
+      <div class="modal-content weather-modal">
       <div style="text-align: right;">
           <button id="close-weather" style="padding: 10px" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span  aria-hidden="true">

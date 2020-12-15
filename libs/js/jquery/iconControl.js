@@ -18,32 +18,59 @@ $(document).ready(function () {
   });
 
   $('#info').click(function () {
-    console.log('info');
-    $('#info-modal').modal('toggle');
+    console.log('options');
+    $('#info-modal-main').modal('show');
+  });
+
+  $('#close-info').on('click', function (e) {
+    console.log('closed');
+    $('#info-modal-main').delay(500).fadeOut('slow');
+    setTimeout(function () {
+      $('#info-modal-main').modal('hide');
+    }, 1500);
+    e.stopPropagation();
   });
 
   $('#maptype').click(function () {
-    console.log('maptype');
-    $('#map-modal').modal('toggle');
+    console.log('options');
+    $('#map-modal-main').modal('show');
+  });
+
+  $('#close-map').on('click', function (e) {
+    console.log('closed');
+    $('#map-modal-main').delay(500).fadeOut('slow');
+    setTimeout(function () {
+      $('#map-modal-main').modal('hide');
+    }, 1500);
+    e.stopPropagation();
   });
 
   $('#weather').click(function () {
-    console.log('weather');
-    $('#weather-modal').modal({ backdrop: 'static', keyboard: false });
+    console.log('options');
+    $('#weather-modal-main').modal('show');
   });
 
   $('#close-weather').on('click', function (e) {
     console.log('closed');
-    $('#weather-modal').delay(1000).fadeOut('slow');
+    $('#weather-modal-main').delay(500).fadeOut('slow');
     setTimeout(function () {
-      $('#weather-modal').modal('hide');
+      $('#weather-modal-main').modal('hide');
     }, 1500);
     e.stopPropagation();
   });
 
   $('#quiz').click(function () {
-    console.log('quiz');
-    $('#quiz-modal').modal('toggle');
+    console.log('options');
+    $('#quiz-modal-main').modal('show');
+  });
+
+  $('#close-quiz').on('click', function (e) {
+    console.log('closed');
+    $('#quiz-modal-main').delay(500).fadeOut('slow');
+    setTimeout(function () {
+      $('#quiz-modal-main').modal('hide');
+    }, 1500);
+    e.stopPropagation();
   });
 
   $('#settings-modal').on('hidden.bs.modal', function () {

@@ -1,10 +1,10 @@
 export const mapModal = () => {
   return `
-  <div class="modal-dialog enterSlowlyLeft animated ml-auto info-modal" role="document">
-    <div class="modal-content info-modal">
-      <div class="modal-content info-modal">
+  <div class="modal-dialog enterSlowlyLeft animated ml-auto map-modal" role="document">
+    <div class="modal-content map-modal">
+      <div class="modal-content map-modal">
       <div style="text-align: right;">
-          <button id="close-weather" style="padding: 10px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id="close-map" style="padding: 10px" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span  aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export const mapModal = () => {
           </button>
           </div>
           <div class="modal-body" style="padding-top: 0">
-<h4 style="padding-left: 1rem">Current Weather Report</h4>
+<h4 style="padding-left: 1rem">Maps</h4>
           <div>
             <div id="weather-data" style="margin-right: 5px; width:18em; height: auto">
               <div class="modal-body">
