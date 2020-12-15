@@ -22,9 +22,9 @@ $(document).ready(function () {
     $('#info-modal-main').modal('show');
   });
 
-  $('#close-info').on('click', function (e) {
+  $('#info-modal-header').on('click', function (e) {
     console.log('closed');
-    $('#info-modal-main').delay(500).fadeOut('slow');
+    $('#info-modal-main').delay(200).fadeOut('slow');
     setTimeout(function () {
       $('#info-modal-main').modal('hide');
     }, 1500);

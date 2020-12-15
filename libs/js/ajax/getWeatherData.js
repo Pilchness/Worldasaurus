@@ -152,6 +152,12 @@ export const handleWeatherData = (country) => {
 
           //console.log(cityWeatherTable);
           $('#city-weather-table').find('tr:gt(0)').remove();
+          $('#city-weather-table').html(` <tr>
+                    <th></th>
+                    <th style="width: 60px">City</th>
+                    <th>Wind</th>
+                    <th style="width: 10px">Temp(°C)</th>
+                  </tr>`);
           $(cityWeatherTable).appendTo('#city-weather-table tbody');
         }
       },

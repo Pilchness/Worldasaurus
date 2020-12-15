@@ -51,6 +51,24 @@
   background-color: transparent;
 }
 
+.modal-header {
+  margin: 0;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-title-text {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 24px !important;
+}
+
 .modal-content {
   border-radius: 0;
   border: 0;
@@ -59,6 +77,61 @@
   box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
   background-clip: padding-box;
   background-color: rgba(63, 127, 191, 0.4);
+}
+
+#country-image-parent {
+  position: relative;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#country-image {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 365px;
+  height: auto;
+  display: block;
+}
+
+#info-button-container {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#info-overlay {
+  position: absolute;
+  background-color: rgba(63, 127, 191, 0.7);
+  top: 0px;
+  left: 0px;
+  padding: 10px;
+}
+
+.modal-button-container.info-modal {
+  margin: 0 auto;
+  width: 90%;
+  flex: 0;
+}
+
+.info-button-select {
+  margin: 0 auto;
+  width: 9em;
+  font-size: 0.8em;
+  background-color: rgba(20, 250, 20, 0.2);
+  border-radius: 5px;
+  margin: 1px;
+}
+
+.info-button-select:hover {
+  background-color: rgba(20, 250, 20, 0.5) !important;
+}
+
+.info-button-select:focus {
+  background-color: rgba(70, 51, 155, 0.2) !important;
 }
 
 /*
@@ -98,11 +171,7 @@
   /* max-width: 500px; */
 /*}
 
-.modal-button-container.info-modal {
-  margin: 0 auto;
-  width: 90%;
-  /* max-width: 500px; */
-/*}
+
 
 .options-button-select {
   width: 9em;
@@ -112,13 +181,7 @@
   margin: 1px;
 }
 
-.info-button-select {
-  width: 9em;
-  font-size: 0.8em;
-  background-color: rgba(20, 250, 20, 0.3);
-  border-radius: 5px;
-  margin: 1px;
-}
+
 
 /* Modal Position and Size */
 
@@ -182,6 +245,15 @@
     width: 320px;
     position: absolute;
     /* background-color: rgba(63, 127, 191, 0.1); */
+  }
+
+  #country-image {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 285px;
+    height: auto;
+    display: block;
   }
 }
 

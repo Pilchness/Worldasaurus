@@ -10,6 +10,11 @@ body {
   font-family: 'Andika New Basic', sans-serif;
 }
 
+button {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .leaflet-pop .leaflet-popup-content-wrapper {
   background: rgba(63, 127, 191, 0.7);
   /* background: #2c3e50; */
@@ -118,25 +123,6 @@ ul {
 
 input:focus {
   outline: none !important;
-}
-
-#parent {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 300px;
-}
-#country-image {
-  position: relative;
-  top: 0;
-  left: 0;
-}
-
-#info-overlay {
-  position: absolute;
-  background-color: rgba(63, 127, 191, 0.7);
-  top: 0px;
-  left: 0px;
 }
 
 #content {
