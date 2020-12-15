@@ -71,8 +71,10 @@ export const handleWeatherData = (country) => {
   <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
   <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
 </svg>`,
-    clearsky: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+    clearsky: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-sunglasses" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM6.5 6.497V6.5h-1c0-.568.447-.947.862-1.154C6.807 5.123 7.387 5 8 5s1.193.123 1.638.346c.415.207.862.586.862 1.154h-1v-.003l-.003-.01a.213.213 0 0 0-.036-.053.86.86 0 0 0-.27-.194C8.91 6.1 8.49 6 8 6c-.491 0-.912.1-1.19.24a.86.86 0 0 0-.271.194.213.213 0 0 0-.036.054l-.003.01z"/>
+  <path d="M2.31 5.243A1 1 0 0 1 3.28 4H6a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2h-.438a2 2 0 0 1-1.94-1.515L2.31 5.243zM9 5a1 1 0 0 1 1-1h2.72a1 1 0 0 1 .97 1.243l-.311 1.242A2 2 0 0 1 11.439 8H11a2 2 0 0 1-2-2V5z"/>
 </svg>`,
     thunder: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z"/>
@@ -133,9 +135,11 @@ export const handleWeatherData = (country) => {
           let cityWeatherTable = '';
           console.log('getting city data', result.data);
           cityData.map((data) => {
-            cityWeatherTable += `<tr><td>${chooseWeatherSymbol(data.weather[0].description)}</td><td>${
-              data.name
-            }</td><td>${data.wind.speed}</td><td>${Math.round(data.main.temp - 273.15)}</td></tr>`; //need to convert temp from K to C
+            cityWeatherTable += `<tr><td>${chooseWeatherSymbol(
+              data.weather[0].description
+            )}</td><td class="table-city">${data.name}</td><td>${data.wind.speed}</td><td>${Math.round(
+              data.main.temp - 273.15
+            )}</td></tr>`; //need to convert temp from K to C
             if ($('#cities-button').val() === 'on' || true) {
               L.marker([data.coord.lat, data.coord.lon])
                 .bindTooltip(data.name, {
@@ -152,12 +156,7 @@ export const handleWeatherData = (country) => {
 
           //console.log(cityWeatherTable);
           $('#city-weather-table').find('tr:gt(0)').remove();
-          $('#city-weather-table').html(` <tr>
-                    <th></th>
-                    <th style="width: 60px">City</th>
-                    <th>Wind</th>
-                    <th style="width: 10px">Temp(°C)</th>
-                  </tr>`);
+          $('#weather-warning').remove();
           $(cityWeatherTable).appendTo('#city-weather-table tbody');
         }
       },

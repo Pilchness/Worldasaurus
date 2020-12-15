@@ -17,6 +17,7 @@ export const getCountryImage = (country) => {
           $('#country-image').attr('src', src);
           $('#country-image').attr('alt', alt);
           $('#country-image-title').text(alt);
+          $('#info-overlay').text('');
           //$('#currentloc').text(capitalizeCountryName(country));
 
           //addPhotoSourceInformation(result.data[0]);

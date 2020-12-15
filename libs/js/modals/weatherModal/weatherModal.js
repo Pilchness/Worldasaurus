@@ -21,12 +21,24 @@ export const weatherModal = () => {
 };
 
 const weatherModalContents = `<div class="modal-body" style="padding-top: 0">
-<h4 id="modal-title-text">Current Weather Report</h4>
-          <div>
-            <div id="weather-data" style="margin-right: 5px; width:18em; height: auto">
-              <div class="modal-body">
+<h4 style="padding-left: 1rem">Current Weather Report</h4>
+          <div style="width: 100%, background-color: red">
+            <div id="weather-data" style="margin-right: 5px; width:100%; height: 100%">
+              <div>
                 <table id="city-weather-table">
-                 
+                <colgroup>
+    <col style="width:10%">
+    <col style="width:50%">
+    <col style="width:20%">
+     <col style="width:20%">
+  </colgroup>  
+                  <tr>
+                    <th style="column-width: 20px"></th>
+                    <th style="column-width: 100px">City</th>
+                    <th style="column-width: 50px">Wind</th>
+                    <th style="column-width: 50px">Temp(°C)</th>
+                  </tr>
+                  <div id="weather-warning">Weather data will appear here when you have searched for a country.</div>
                 </table>
               </div>
             </div>

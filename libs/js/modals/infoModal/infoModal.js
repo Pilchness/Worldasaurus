@@ -20,7 +20,7 @@ export const infoModal = () => {
     </div>`;
 };
 
-const infoModalContents = `     <div class="modal-body">
+const infoModalContents = `<div class="modal-body">
           <figure id="info-figure">
             <figcaption id="country-image-title">Sorry, no image available</figcaption>
 

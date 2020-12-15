@@ -29,14 +29,22 @@ const countryFocus = (country) => {
   handleWeatherData(country);
 };
 
-// $('.dropdown').on('click', function () {
-//   for (let j = 0; j < parsedGeoDataArray.length; j++) {
-//     //console.log(parsedGeoDataArray[j].properties.name, $('#country-search').val());
-//     if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
-//       console.log('matched');
-//       countryFocus(parsedGeoDataArray[j]);
-//     }
-//   }
+const detectClickOnCountryName = () => {
+  $('.dropdown').on('click', function () {
+    for (let j = 0; j < parsedGeoDataArray.length; j++) {
+      //console.log(parsedGeoDataArray[j].properties.name, $('#country-search').val());
+      if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
+        console.log('matched');
+        countryFocus(parsedGeoDataArray[j]);
+      }
+    }
+  });
+};
+// $(document).ready(function () {
+//   var obj = document.getElementById('country-search');
+//   obj.appendChild = function () {
+//     alert('changed!');
+//   };
 // });
 
 mapsource.stadia(); //default map style
@@ -66,11 +74,15 @@ $('#country-search').on('input', function () {
     if (countryMatches.length === 1) {
       countryFocus(country);
     }
-    return `<li><button id="${country.properties.name}" class="dropdown" 
+    return `<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
     onClick="setInputVal(${country.properties.name})"  
-    value="${country.properties.name}">${country.properties.name.slice(0, 16)}</button></li>`;
+    value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`;
   });
   $('#search-suggestions').html(
-    `<ul id="suggestion-list" style="margin-top: 14px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(/,/g, '')
+    `<ul id="suggestion-list" style="margin-top: 18px; width: 300px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(
+      /,/g,
+      ''
+    )
   );
+  detectClickOnCountryName();
 });
