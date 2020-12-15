@@ -31,6 +31,37 @@
   }
 }
 
+.animated.modal-dialog {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.modal-dialog {
+  /* padding-left: calc(80px); */
+  left: -320px;
+  top: 72px;
+  width: 400px;
+  position: absolute;
+  /* background-color: rgba(63, 127, 191, 0.1); */
+}
+
+.modal-backdrop {
+  background-color: transparent;
+}
+
+.modal-content {
+  border-radius: 0;
+  border: 0;
+  -webkit-box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
+  box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
+  background-clip: padding-box;
+  background-color: rgba(63, 127, 191, 0.4);
+}
+
+/*
 .modal-dialog.options-modal {
   margin: 0;
   left: calc(-100vw + 97px);
@@ -38,15 +69,9 @@
   width: 23.5em;
   background-color: rgba(63, 127, 191, 0.1);
 }
+*/
 
-.animated.options-modal,
-.animated.info-modal {
-  -webkit-animation-duration: 3s;
-  animation-duration: 3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
+/*
 .modal-header.options-modal {
   border-radius: 0;
   background-color: rgba(63, 127, 191, 0.1);
@@ -64,32 +89,20 @@
   background-clip: padding-box;
   background-color: rgba(63, 127, 191, 0.1);
 }
+*/
 
-.modal-content.info-modal {
-  border-radius: 0;
-  border: 0;
-  -webkit-box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
-  box-shadow: -12px 0 38px -14px rgba(0, 0, 0, 0.25);
-  background-clip: padding-box;
-  background-color: rgba(63, 127, 191, 0.1);
-}
-
-.modal-backdrop {
-  background-color: transparent;
-}
-
+/*
 .modal-button-container.options-modal {
   margin: 0 auto;
   width: 90%;
-  max-width: 500px;
-}
+  /* max-width: 500px; */
+/*}
 
 .modal-button-container.info-modal {
   margin: 0 auto;
   width: 90%;
-  max-width: 500px;
-}
+  /* max-width: 500px; */
+/*}
 
 .options-button-select {
   width: 9em;
@@ -108,14 +121,8 @@
 }
 
 /* Modal Position and Size */
-.modal-dialog.info-modal {
-  margin: 0;
-  left: calc(-100vw + 80px);
-  top: 100px;
-  width: 400px;
-  background-color: rgba(63, 127, 191, 0.1);
-}
 
+/*
 .leaveSlowlyLeft {
   -webkit-animation-name: leaveSlowlyLeft;
   animation-name: leaveSlowlyLeft;
@@ -149,6 +156,14 @@
   }
 }
 
+.modal-body {
+  width: 400px;
+}
+
+.info-modal-content {
+  max-width: 400px;
+}
+
 /* .info-overlay {
   background-color: rgba(63, 127, 191, 0.7);
   position: absolute;
@@ -157,3 +172,24 @@
   width: 200px;
   height: 200px;
 } */
+
+@media only screen and (max-width: 575px) {
+  /* Modal Position and Size */
+  .modal-dialog {
+    /* padding-left: calc(80px); */
+    left: -240px;
+    top: 92px;
+    width: 320px;
+    position: absolute;
+    /* background-color: rgba(63, 127, 191, 0.1); */
+  }
+}
+
+/* .info-modal,
+  .info-modal-main {
+    width: 100vw;
+  }
+
+  .info-modal-content {
+    width: 100vw;
+  } */
