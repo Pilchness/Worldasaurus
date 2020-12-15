@@ -6,11 +6,12 @@ export const map = L.map('mapid', {
   dragging: true,
   doubleClickZoom: false,
   boxZoom: false,
-  touchZoom: false,
-  maxZoom: 10
+  rendere: L.canvas,
+  touchZoom: false
 }).setView([51.505, -0.09], 5);
 
 export const layer = L.geoJSON().addTo(map);
+
 // const geojsonFeature = {}
 // L.geoJSON(geojsonFeature).addTo(map);
 // export const geoJSONLayer = () => {
@@ -52,4 +53,11 @@ export const jawg = () => {
 
 export const forest = () => {
   return L.tileLayer.provider('Thunderforest.Landscape', { apikey: '6edf007c572b46c88e5016bfe349c3bc' }).addTo(map);
+};
+
+export const arc = () => {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution:
+      'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  }).addTo(map);
 };

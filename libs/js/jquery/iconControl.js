@@ -121,23 +121,32 @@ $(document).ready(function () {
     $('#quiz-modal').modal('show');
   });
 
-  $('#stadia').click(function () {
-    console.log('stadia');
-    mapsource.stadia();
-  });
+  // $('#stadia').click(function () {
+  //   console.log('stadia');
+  //   stadia();
+  // });
 
-  $('#here').click(function () {
-    console.log('here');
-    mapsource.here();
-  });
+  // $('#here').click(function () {
+  //   console.log('here');
+  //   here();
+  // });
 
-  $('#jawg').click(function () {
-    console.log('jawg');
-    mapsource.jawg();
-  });
+  // const jawg = () => {
+  //   return L.tileLayer
+  //     .provider('Jawg.Streets', {
+  //       variant: '',
+  //       accessToken: 'YFmp77AAW81RBaq2LhxMCkDSdGniKo085kcxnS9PwVn0TboLUaw3Q21waAn7jTQ5'
+  //     })
+  //     .addTo(map);
+  // };
 
-  $('#forest').click(function () {
-    console.log('forest');
-    mapsource.forest();
-  });
+  // $('#jawg').click(function () {
+  //   console.log('jawg');
+  //   jawg();
+  // });
+
+  // $('#forest').click(function () {
+  //   console.log('forest');
+  //   forest();
+  // });
 });

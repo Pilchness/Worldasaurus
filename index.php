@@ -33,7 +33,8 @@
     </title>
   </head>
   <body>
-    <script id="functions">const setInputVal = (data) => $('#country-search').val(data.innerText)</script>
+    <script id="functions">const setInputVal = (data) => $('#country-search').val(data);
+    </script>
     <div id="preloader">
     </div>
     <div id="mapid">
@@ -60,8 +61,8 @@
     </script>
     <script type="module" src="data/dataControl.js">
     </script>
-     <script type="module" src="libs/js/leafletcode/mappingConstants.js">
-    </script> 
+     <!-- <script type="module" src="libs/js/leafletcode/mappingConstants.js">
+    </script>  -->
     
   
 

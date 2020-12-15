@@ -12,19 +12,23 @@ let parsedGeoDataArray; //parsed geoData array of countries and data
 let countryList; //object containing country names with numbered keys
 
 const countryFocus = (country) => {
+  console.log(country.properties.name);
   //$('#search-suggestions').html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`);
   $('#search-suggestions')
     .hide()
     .html(
-      `<ul id="suggestion-list" style="margin-top: 14px"><li><button id="${country.properties.name}" class="dropdown" 
-    onClick="setInputVal(${country.properties.name})"  
+      `<ul id="suggestion-list" style="margin-top: 20px"><li><button style="font-size: 20px; color: white;" id="${country.properties.name}" class="dropdown" 
+    onClick="$('#info-modal-main').delay(0).fadeOut('slow');
+    setTimeout(function () {
+      $('#info-modal-main').modal('toggle');
+    }, 300);"  
     value="${country.properties.name}">${country.properties.name}</button></li></ul>`
     )
     .fadeIn(1500);
   //const countryISO = getCountryISOCode(country);
-  const tooltipHTML = `<figure><h5>${country.properties.name}</h5><p>${country.properties.name}</p></figure>`;
+  //const tooltipHTML = `<figure><h5>${country.properties.name}</h5><p>${country.properties.name}</p></figure>`;
 
-  layeradd.addCountryOutline(country, tooltipHTML);
+  layeradd.addCountryOutline(country);
   getCountryImage(country.properties.name.split(' ').join('_'));
   handleWeatherData(country);
 };
@@ -47,7 +51,7 @@ const detectClickOnCountryName = () => {
 //   };
 // });
 
-mapsource.stadia(); //default map style
+mapsource.arc(); //default map style
 const currentLocation = getCurrentNavCords();
 
 $('#content').html(pageHeader).append(leftMenu);
@@ -74,10 +78,14 @@ $('#country-search').on('input', function () {
     if (countryMatches.length === 1) {
       countryFocus(country);
     }
+    console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
+    onClick="setInputVal('${country.properties.name}')"  
+    value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);
     return `<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
-    onClick="setInputVal(${country.properties.name})"  
+    onClick="setInputVal('${country.properties.name}')"  
     value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`;
   });
+
   $('#search-suggestions').html(
     `<ul id="suggestion-list" style="margin-top: 18px; width: 300px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(
       /,/g,

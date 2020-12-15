@@ -20,7 +20,7 @@ export const weatherModal = () => {
     </div>`;
 };
 
-const weatherModalContents = `<div class="modal-body" style="padding-top: 0">
+const weatherModalContents = `<div class="modal-body" style="padding-top: 0; color: white">
 <h4 style="padding-left: 1rem">Current Weather Report</h4>
           <div style="width: 100%, background-color: red">
             <div id="weather-data" style="margin-right: 5px; width:100%; height: 100%">

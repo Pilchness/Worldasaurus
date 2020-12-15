@@ -1,49 +1,38 @@
+import { closeIcon } from '../modalcomponents/icons.js';
+
 export const mapModal = () => {
-  return `
-  <div class="modal-dialog enterSlowlyLeft animated ml-auto map-modal" role="document">
-    <div class="modal-content map-modal">
+  return `<div class="modal-dialog enterSlowlyLeft animated ml-auto map-modal" role="document">
       <div class="modal-content map-modal">
-      <div style="text-align: right;">
-          <button id="close-map" style="padding: 10px" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span  aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="currentColor"
-                class="bi bi-x-square"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-            </span>
+        <div id="map-modal-header" class="map-modal">
+          <button
+            id="close-map"
+            style="padding: 10px; margin-right: 0px"
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            ${closeIcon}
           </button>
-          </div>
-          <div class="modal-body" style="padding-top: 0">
-<h4 style="padding-left: 1rem">Maps</h4>
-          <div>
-            <div id="weather-data" style="margin-right: 5px; width:18em; height: auto">
-              <div class="modal-body">
-                <table id="city-weather-table">
-                  <tr>
-                    <th>F/c</th>
-                    <th style="width: 60px">City</th>
-                    <th>Wind</th>
-                    <th style="width: 10px">Temp(°C)</th>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
+   ${mapModalContents}
       </div>
+    </div>`;
+};
+
+const mapModalContents = `<div class="modal-body" style="padding-top: 0">
+    <div style="display: flex; align-items: center; justify-content: space-around; margin: auto; flex-wrap: wrap">
+      <button id="stadia" class="map-button" style="padding: 5px">
+        <img src="images/smapthumb.png" alt="map style 1" />
+      </button>
+      <button id="here" class="map-button" style="padding: 5px">
+        <img src="images/hmapthumb.png" alt="map style 2" />
+      </button>
+      <button id="jawg" class="map-button" style="padding: 5px">
+        <img src="images/jmapthumb.png" alt="map style 3" />
+      </button>
+      <button id="forest" class="map-button" style="padding: 5px">
+        <img src="images/fmapthumb.png" alt="map style 4" />
+      </button>
     </div>
   </div>`;
-};
