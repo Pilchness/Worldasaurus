@@ -1,6 +1,7 @@
 import * as mapsource from './mappingConstants.js';
 
 export const getCurrentNavCords = () => {
+  console.log('getting current location');
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(function (position) {
       $.ajax({
@@ -19,6 +20,7 @@ export const getCurrentNavCords = () => {
               .addTo(mapsource.map);
           }
           mapsource.map.flyTo([position.coords.latitude, position.coords.longitude], 5);
+          console.log(response);
           return response.data.results[0].formatted;
         },
 

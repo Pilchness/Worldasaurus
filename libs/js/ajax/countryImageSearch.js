@@ -53,3 +53,11 @@ export const getCountryImage = (country) => {
     }
   });
 };
+
+const functiong = () => {
+  $('#conversion').text(
+    (
+      Math.round(($('#currency-exchange').val() / response.data[currencies.code]) * Math.pow(10, 2)) / Math.pow(10, 2)
+    ).toFixed(2)
+  );
+};

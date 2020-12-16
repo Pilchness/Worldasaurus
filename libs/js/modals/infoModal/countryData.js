@@ -1,5 +1,7 @@
 //import * as mapsource from './mapsources.js';
 import { currencyInformation } from '../../ajax/getCurrencyInfo.js';
+import { locateIcon } from '../../ajax/getWeatherData.js';
+import * as mapsource from '../../leafletcode/mappingConstants.js';
 
 export const hideAll = () => {
   $('#facts-overlay').hide();
@@ -28,7 +30,7 @@ export const getCountryData = (ISOcode) => {
   });
 
   const handleCountryData = (countryData) => {
-    //console.log(countryData);
+    console.log(countryData);
     const countryName = countryData.data.name;
     const flagLink = countryData.data.flag;
     const population = countryData.data.population;
@@ -47,21 +49,64 @@ export const getCountryData = (ISOcode) => {
     console.log(currencies);
     currencyInformation(currencies[0], countryName);
 
-    let factsData = `
+    $.ajax({
+      url: 'libs/php/getLatLongFromPlacename.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        city: capital.replace(/ /g, '%20')
+      },
+
+      success: function (result) {
+        console.log(result.data.results[0].geometry);
+        let id = result.data.results[0].components.postcode;
+
+        let factsData = `
              <ul>
                <li>Population: ${population}</li>
                <li>Area: ${area} km²</li>
                <li>Region: ${region}</li>
+                 <li>Capital City: ${capital} ${locateIcon(id)}</li>
                <li>Sub Region: ${subregion}</li>
                <li>Gini Rating: ${giniRating}</li>
              </ul>
            `;
 
-    $('#facts-overlay').html(factsData);
+        $('#facts-overlay').html(factsData);
 
-    $('#menu-facts').on('click', function () {
-      hideAll();
-      $('#facts-overlay').toggle();
+        $('#menu-facts').on('click', function () {
+          hideAll();
+          $('#facts-overlay').toggle();
+        });
+
+        $(`#${id}`).hover(
+          function () {
+            $(`#${id}`).attr('fill', 'rgba(70, 51, 155, 0.9)');
+          },
+          function () {
+            $(`#${id}`).attr('fill', 'white');
+          }
+        );
+
+        $(`#${id}`).on('click', function () {
+          let cityName = result.data.results[0].components.city;
+          let lat = result.data.results[0].geometry.lat;
+          let long = result.data.results[0].geometry.lng;
+          L.marker([lat, long])
+            .bindTooltip(cityName, {
+              permanent: true,
+              direction: 'right',
+              sticky: true,
+              offset: [10, 0],
+              opacity: 0.75,
+              className: 'capital-city-tooltip'
+            })
+            .addTo(mapsource.map);
+        });
+      },
+      error: function (errorThrown) {
+        console.log(errorThrown);
+      }
     });
 
     let timezonesData = () => {

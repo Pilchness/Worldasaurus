@@ -47,13 +47,13 @@ const infoModalContents = `<div class="modal-body">
         Photographer
       </button>
       <button id="menu-next" class="info-button-select options-modal">
-        Next Photo
+        Photos
       </button>
       <button id="menu-timezones" class="info-button-select options-modal">
         Timezones
       </button>
       <button id="menu-currencies" class="info-button-select options-modal">
-        Currencies
+        Currency
       </button>
       <button id="menu-borders" class="info-button-select options-modal">
         Borders
