@@ -104,7 +104,7 @@
   justify-content: center;
 }
 
-#info-overlay {
+.info-overlay {
   position: absolute;
   background-color: rgba(63, 127, 191, 0.7);
   top: 0px;
@@ -145,6 +145,21 @@ td {
   width: 100%;
   text-align: left;
   vertical-align: middle;
+}
+
+.city-tooltip {
+  position: absolute;
+  padding: 4px;
+  background-color: rgba(70, 51, 155, 0.8);
+  border: 0px solid #000;
+  color: #000;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /*

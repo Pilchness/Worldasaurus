@@ -4,6 +4,7 @@ import { getCurrentNavCords } from './leafletcode/currentLocation.js';
 import { getListOfPossibleCountries } from './leafletcode/countrySearch.js';
 import { handleWeatherData } from './ajax/getWeatherData.js';
 import { getCountryImage } from './ajax/countryImageSearch.js';
+import { getCountryData } from './modals/infoModal/countryData.js';
 import { decodeGeodata } from './ajax/geoDataDecode.js';
 import { pageHeader } from './components/pageHeader.js';
 import { leftMenu } from './components/leftMenu.js';
@@ -12,7 +13,7 @@ let parsedGeoDataArray; //parsed geoData array of countries and data
 let countryList; //object containing country names with numbered keys
 
 const countryFocus = (country) => {
-  console.log(country.properties.name);
+  //console.log(country.properties.name);
   //$('#search-suggestions').html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`);
   $('#search-suggestions')
     .hide()
@@ -30,6 +31,8 @@ const countryFocus = (country) => {
 
   layeradd.addCountryOutline(country);
   getCountryImage(country.properties.name.split(' ').join('_'));
+  getCountryData(country.properties.iso_a3);
+  $('#default-overlay').hide();
   handleWeatherData(country);
 };
 
@@ -38,7 +41,7 @@ const detectClickOnCountryName = () => {
     for (let j = 0; j < parsedGeoDataArray.length; j++) {
       //console.log(parsedGeoDataArray[j].properties.name, $('#country-search').val());
       if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
-        console.log('matched');
+        //console.log('matched');
         countryFocus(parsedGeoDataArray[j]);
       }
     }
@@ -78,9 +81,9 @@ $('#country-search').on('input', function () {
     if (countryMatches.length === 1) {
       countryFocus(country);
     }
-    console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
-    onClick="setInputVal('${country.properties.name}')"  
-    value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);
+    // console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown"
+    // onClick="setInputVal('${country.properties.name}')"
+    // value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);
     return `<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
     onClick="setInputVal('${country.properties.name}')"  
     value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`;

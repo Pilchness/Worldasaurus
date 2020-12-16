@@ -18,7 +18,7 @@ export const handleWeatherData = (country) => {
   // });
 
   const getCities = (countryCode) => {
-    console.log(countryCode);
+    //console.log(countryCode);
     $.ajax({
       type: 'POST',
       url: 'libs/php/cityWeatherDecode.php',
@@ -32,7 +32,7 @@ export const handleWeatherData = (country) => {
             matchingCities.push(cityDataObject.id);
           }
         });
-        console.log(response);
+        //console.log(response);
         getWeatherData(matchingCities);
       },
       error: function (errorThrown) {
@@ -52,6 +52,24 @@ export const handleWeatherData = (country) => {
   //   return countryCode;
 
   // };
+
+  const locateIcon = (id) => {
+    return `<svg
+            id=${id}
+            width="16px"
+            height="16px"
+            viewBox="0 0 16 16"
+            class="bi bi-geo-alt locate-city-icon"
+            fill="white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+            />
+            <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+          </svg>`;
+  };
 
   const weatherIcons = {
     overcastcloud: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-fill" viewBox="0 0 16 16">
@@ -110,7 +128,7 @@ export const handleWeatherData = (country) => {
   };
 
   const getWeatherData = (cityArray) => {
-    console.log('getting weather');
+    //console.log('getting weather');
     const generateCityCodeString = () => {
       let cityCodeString = cityArray[0];
       for (let i = 1; i < 10; i++) {
@@ -130,24 +148,26 @@ export const handleWeatherData = (country) => {
 
       success: function (result) {
         if (result.status.name === 'ok') {
-          console.log(result.data);
+          //console.log(result.data);
           const cityData = result.data;
           let cityWeatherTable = '';
-          console.log('getting city data', result.data);
+          //console.log('getting city data', result.data);
           cityData.map((data) => {
             cityWeatherTable += `<tr><td>${chooseWeatherSymbol(
               data.weather[0].description
             )}</td><td class="table-city">${data.name}</td><td>${data.wind.speed}</td><td>${Math.round(
               data.main.temp - 273.15
-            )}</td></tr>`; //need to convert temp from K to C
-            if ($('#cities-button').val() === 'on' || true) {
-              L.marker([data.coord.lat, data.coord.lon])
-                .bindTooltip(data.name, {
-                  permanent: false,
-                  direction: 'auto'
-                })
-                .addTo(mapsource.map);
-            }
+            )}</td><td class="locate-city" value=${data.id} lat=${data.coord.lat} long=${data.coord.lon} name=${
+              data.name
+            }>${locateIcon(data.id)}</td></tr>`; //need to convert temp from K to C
+            // if ($('#cities-button').val() === 'on' || true) {
+            //   L.marker([data.coord.lat, data.coord.lon])
+            //     .bindTooltip(data.name, {
+            //       permanent: false,
+            //       direction: 'auto'
+            //     })
+            //     .addTo(mapsource.map);
+            // }
           });
 
           // $('#weather').on('click', function () {
@@ -158,11 +178,37 @@ export const handleWeatherData = (country) => {
           $('#city-weather-table').find('tr:gt(0)').remove();
           $('#weather-warning').remove();
           $(cityWeatherTable).appendTo('#city-weather-table tbody');
+          $('.locate-city').hover(
+            function () {
+              let cityId = $(this).attr('value');
+              $(`#${cityId}`).attr('fill', 'rgba(70, 51, 155, 0.9)');
+            },
+            function () {
+              let cityId = $(this).attr('value');
+              $(`#${cityId}`).attr('fill', 'white');
+            }
+          );
+
+          $('.locate-city').on('click', function () {
+            let cityName = $(this).attr('name');
+            let lat = $(this).attr('lat');
+            let long = $(this).attr('long');
+            L.marker([lat, long])
+              .bindTooltip(cityName, {
+                permanent: true,
+                direction: 'right',
+                sticky: true,
+                offset: [10, 0],
+                opacity: 0.75,
+                className: 'city-tooltip'
+              })
+              .addTo(mapsource.map);
+          });
         }
       },
 
       error: function (errorThrown) {
-        console.log(generateCityCodeString());
+        //console.log(generateCityCodeString());
         console.log(errorThrown);
       }
     });

@@ -10,7 +10,7 @@ export const getCountryFlagInfo = (country) => {
       for (let i = 0; i < countryData.length; i++) {
         if (countryData[i].properties.name.toLowerCase() === country) {
           ISOcode = countryData[i].properties.iso_a3;
-          console.log(ISOcode);
+          //console.log(ISOcode);
         }
       }
     },

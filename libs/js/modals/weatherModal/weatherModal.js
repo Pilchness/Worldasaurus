@@ -24,7 +24,7 @@ const weatherModalContents = `<div class="modal-body" style="padding-top: 0; col
 <h4 style="padding-left: 1rem">Current Weather Report</h4>
           <div style="width: 100%, background-color: red">
             <div id="weather-data" style="margin-right: 5px; width:100%; height: 100%">
-              <div>
+              <div style="margin-right: 20px">
                 <table id="city-weather-table">
                 <colgroup>
     <col style="width:10%">
@@ -34,9 +34,10 @@ const weatherModalContents = `<div class="modal-body" style="padding-top: 0; col
   </colgroup>  
                   <tr>
                     <th style="column-width: 20px"></th>
-                    <th style="column-width: 100px">City</th>
+                    <th style="column-width: 80px">City</th>
                     <th style="column-width: 50px">Wind</th>
                     <th style="column-width: 50px">Temp(°C)</th>
+                    <th style="column-width: 20px"></th>
                   </tr>
                   <div id="weather-warning">Weather data will appear here when you have searched for a country.</div>
                 </table>

@@ -61,8 +61,9 @@
     </script>
     <script type="module" src="data/dataControl.js">
     </script>
-     <!-- <script type="module" src="libs/js/leafletcode/mappingConstants.js">
-    </script>  -->
+     <script type="module" src="libs/js/leafletcode/mappingConstants.js">
+    </script> 
+    
     
   
 

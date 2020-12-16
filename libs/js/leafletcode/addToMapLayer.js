@@ -4,9 +4,11 @@ const map = mapsource.map;
 
 export const addCountryOutline = (country) => {
   mapsource.layer.clearLayers();
-  const countryOutline = mapsource.layer.addData(country, { style: {} }).on('click', function () {
-    console.log(country);
-  });
+  const countryOutline = mapsource.layer
+    .addData(country, { style: { color: '#ff0000', weight: 50, opacity: 0.65 } })
+    .on('click', function () {
+      //console.log(country);
+    });
   // .bindTooltip(tooltipHTML, {
   //   permanent: true,
   //   direction: 'right',

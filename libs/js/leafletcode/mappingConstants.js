@@ -61,3 +61,10 @@ export const arc = () => {
       'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   }).addTo(map);
 };
+
+$(document).ready(function () {
+  $('#here').on('click', function () {
+    console.log('here');
+    here();
+  });
+});
