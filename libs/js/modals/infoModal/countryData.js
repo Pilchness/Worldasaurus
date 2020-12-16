@@ -3,14 +3,17 @@ import { currencyInformation } from '../../ajax/getCurrencyInfo.js';
 import { locateIcon } from '../../ajax/getWeatherData.js';
 import * as mapsource from '../../leafletcode/mappingConstants.js';
 
-export const hideAll = () => {
-  $('#facts-overlay').hide();
-  $('#photographer-overlay').hide();
-  $('#timezones-overlay').hide();
-  $('#currencies-overlay').hide();
-  $('#borders-overlay').hide();
-  $('#languages-overlay').hide();
-  $('#pois-overlay').hide();
+export const hideAll = (overlay) => {
+  if (overlay != 'facts') {
+    $('#facts-overlay').hide();
+  }
+  if (overlay != 'photographer') $('#photographer-overlay').hide();
+  if (overlay != 'photos') $('#photos-overlay').hide();
+  if (overlay != 'timezones') $('#timezones-overlay').hide();
+  if (overlay != 'currencies') $('#currencies-overlay').hide();
+  if (overlay != 'borders') $('#borders-overlay').hide();
+  if (overlay != 'languages') $('#languages-overlay').hide();
+  if (overlay != 'pois') $('#pois-overlay').hide();
 };
 
 export const getCountryData = (ISOcode) => {
@@ -75,7 +78,8 @@ export const getCountryData = (ISOcode) => {
         $('#facts-overlay').html(factsData);
 
         $('#menu-facts').on('click', function () {
-          hideAll();
+          console.log('menu facts');
+          hideAll('facts');
           $('#facts-overlay').toggle();
         });
 
@@ -126,7 +130,7 @@ export const getCountryData = (ISOcode) => {
     $('#timezones-overlay').html(timezonesData);
 
     $('#menu-timezones').on('click', function () {
-      hideAll();
+      hideAll('timezones');
       $('#timezones-overlay').toggle();
 
       let bordersData = `
@@ -142,7 +146,7 @@ export const getCountryData = (ISOcode) => {
       $('#borders-overlay').html(bordersData);
 
       $('#menu-borders').on('click', function () {
-        hideAll();
+        hideAll('borders');
         $('#borders-overlay').toggle();
       });
 
@@ -159,7 +163,7 @@ export const getCountryData = (ISOcode) => {
       $('#languages-overlay').html(languagesData);
 
       $('#menu-languages').on('click', function () {
-        hideAll();
+        hideAll('languages');
         $('#languages-overlay').toggle();
       });
 
@@ -176,7 +180,7 @@ export const getCountryData = (ISOcode) => {
       $('#pois-overlay').html(poisData);
 
       $('#menu-pois').on('click', function () {
-        hideAll();
+        hideAll('pois');
         $('#pois-overlay').toggle();
       });
     });

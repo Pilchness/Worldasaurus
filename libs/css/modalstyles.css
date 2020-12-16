@@ -183,6 +183,12 @@ td {
   flex-direction: row;
 }
 
+#photos-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /*
 .modal-dialog.options-modal {
   margin: 0;

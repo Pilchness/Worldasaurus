@@ -32,6 +32,7 @@ const infoModalContents = `<div class="modal-body">
         </div>
         <div id="facts-overlay" class="info-overlay" style="display: none"></div>
         <div id="photographer-overlay" class="info-overlay" style="display: none"></div>
+        <div id="photos-overlay" class="info-overlay" style="display: none"></div>
         <div id="timezones-overlay" class="info-overlay" style="display: none"></div>
         <div id="currencies-overlay" class="info-overlay" style="display: none"></div>
         <div id="borders-overlay" class="info-overlay" style="display: none"></div>
@@ -46,7 +47,7 @@ const infoModalContents = `<div class="modal-body">
       <button id="menu-photographer" class="info-button-select options-modal">
         Photographer
       </button>
-      <button id="menu-next" class="info-button-select options-modal">
+      <button id="menu-photos" class="info-button-select options-modal">
         Photos
       </button>
       <button id="menu-timezones" class="info-button-select options-modal">

@@ -36,12 +36,67 @@ export const getCountryImage = (country) => {
 
           $('#photographer-overlay').html(photographerInfo);
           $('#menu-photographer').on('click', function () {
-            hideAll();
+            hideAll('photographer');
             $('#photographer-overlay').toggle();
           });
-          //$('#currentloc').text(capitalizeCountryName(country));
 
-          //addPhotoSourceInformation(result.data[0]);
+          const extraPhotos = () => {
+            const photos = result.data.slice(1, 10);
+            console.log(photos);
+            let photoDisplayCode = '';
+            photos.forEach((photo) => {
+              photoDisplayCode += `<img id=${photo.id} class="gallery-photo" src='${photo.urls.raw}&w=50&dpr=2' alt='${photo.alt_description} width: '33%' height: 'auto'; style="padding: 5px; opacity: 1">`;
+            });
+            return `<div id="photos-gallery">` + photoDisplayCode + `</div>`;
+          };
+
+          const photosOverlayCode = extraPhotos();
+          console.log(photosOverlayCode);
+          $('#photos-overlay').html(photosOverlayCode);
+
+          $('#menu-photos').on('click', function () {
+            //console.log('photos');
+            hideAll('photos');
+            $('#photos-overlay').toggle();
+          });
+
+          $('.gallery-photo').hover(
+            function () {
+              let photoId = $(this).attr('id');
+              $(`#${photoId}`).css('opacity', '0.5');
+            },
+            function () {
+              let photoId = $(this).attr('id');
+              $(`#${photoId}`).css('opacity', '1');
+            }
+          );
+
+          $('.gallery-photo').on('click', function () {
+            let photoId = $(this).attr('id');
+            result.data.slice(1, 10).forEach((photoData) => {
+              if (photoData.id === photoId) {
+                hideAll('photos');
+                $('#country-image').attr('src', photoData.urls.raw);
+                $('#country-image').attr('alt', photoData.alt_description);
+                $('#country-image-title').text(photoData.alt_description);
+
+                let data = photoData;
+                photographerInfo = `
+             <ul>
+               <li>Photographer: ${data.user.name}</li>
+               <li>Portfolio: ${data.user.portfolio_url}</li>
+               <li>Home Location: ${data.user.locatio}</li>
+               <li>Twitter Name: ${data.user.twitter_username}</li>
+               <li style="font-size: 0.6em">Bio: ${data.user.bio}</li>
+                <li>Created: ${new Date(data.created_at).toString().slice(4, 15)}</li>
+                 <li>Number of Likes: ${data.likes}</li>
+             </ul>
+           `;
+
+                $('#photographer-overlay').html(photographerInfo);
+              }
+            });
+          });
         } else {
           $('#country-image').attr('src', 'images/defaultcountry.png');
         }
@@ -52,12 +107,4 @@ export const getCountryImage = (country) => {
       console.log(errorThrown);
     }
   });
-};
-
-const functiong = () => {
-  $('#conversion').text(
-    (
-      Math.round(($('#currency-exchange').val() / response.data[currencies.code]) * Math.pow(10, 2)) / Math.pow(10, 2)
-    ).toFixed(2)
-  );
 };
