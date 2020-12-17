@@ -12,6 +12,9 @@ export const map = L.map('mapid', {
 
 export const layer = L.geoJSON().addTo(map);
 
+// map.on('click', function (e) {
+//   alert('Lat, Lon : ' + e.latlng.lat + ', ' + e.latlng.lng);
+// });
 // const geojsonFeature = {}
 // L.geoJSON(geojsonFeature).addTo(map);
 // export const geoJSONLayer = () => {

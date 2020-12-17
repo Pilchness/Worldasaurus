@@ -4,6 +4,7 @@ export const infoModal = () => {
   return `<div class="modal-dialog enterSlowlyLeft animated ml-auto info-modal" role="document">
       <div class="modal-content info-modal">
         <div id="info-modal-header" class="info-modal">
+        <div id="flag-container">flag</div>
           <button
             id="close-info"
             style="padding: 10px; margin-right: 0px"

@@ -51,7 +51,6 @@ export const getCountryImage = (country) => {
           };
 
           const photosOverlayCode = extraPhotos();
-          console.log(photosOverlayCode);
           $('#photos-overlay').html(photosOverlayCode);
 
           $('#menu-photos').on('click', function () {

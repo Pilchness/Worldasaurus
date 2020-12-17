@@ -13,6 +13,7 @@ let parsedGeoDataArray; //parsed geoData array of countries and data
 let countryList; //object containing country names with numbered keys
 
 const countryFocus = (country) => {
+  console.log(country);
   //console.log(country.properties.name);
   //$('#search-suggestions').html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`);
   $('#search-suggestions')
@@ -36,8 +37,8 @@ const countryFocus = (country) => {
   handleWeatherData(country);
 };
 
-const detectClickOnCountryName = () => {
-  $('.dropdown').on('click', function () {
+export const detectClickOnCountryName = (targetButton) => {
+  $(targetButton).on('click', function () {
     for (let j = 0; j < parsedGeoDataArray.length; j++) {
       //console.log(parsedGeoDataArray[j].properties.name, $('#country-search').val());
       if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
@@ -59,7 +60,10 @@ const currentLocation = getCurrentNavCords();
 
 $('#content').html(pageHeader).append(leftMenu);
 
+let countryCodes;
+
 const generateCountryList = (parsedGeoData) => {
+  console.log();
   //console.log('pgd', parsedGeoData);
   parsedGeoDataArray = parsedGeoData;
 
@@ -69,7 +73,22 @@ const generateCountryList = (parsedGeoData) => {
     countries[i] = parsedGeoDataArray[i].properties.name.toLowerCase();
   }
   countryList = countries;
+  console.log(countryList);
+  countryCodes = generateCountryCodeLookUp(parsedGeoDataArray);
   return countries;
+};
+
+export const countryCodeLookup = () => {
+  return countryCodes;
+};
+
+const generateCountryCodeLookUp = (parsedGeoData) => {
+  parsedGeoDataArray = parsedGeoData;
+  let countryCodes = {};
+  for (let i = 0; i < parsedGeoDataArray.length; i++) {
+    countryCodes[parsedGeoDataArray[i].properties.iso_a3] = parsedGeoDataArray[i].properties.name;
+  }
+  return countryCodes;
 };
 
 decodeGeodata().then((data) => generateCountryList(data));
@@ -81,12 +100,20 @@ $('#country-search').on('input', function () {
     if (countryMatches.length === 1) {
       countryFocus(country);
     }
+
+    let countryNameSanitized = country.properties.name
+      .slice(0, 20)
+      .normalize('NFD')
+      .replace(/'/g, '\x27')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    console.log(typeof countryNameSanitized);
     // console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown"
     // onClick="setInputVal('${country.properties.name}')"
     // value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);
-    return `<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown" 
-    onClick="setInputVal('${country.properties.name}')"  
-    value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`;
+    return `<li style="margin: 1px;"><button id="${countryNameSanitized}" class="dropdown" 
+    onClick="setInputVal('${countryNameSanitized}')"  
+    value="${countryNameSanitized}">${countryNameSanitized}</button></li>`;
   });
 
   $('#search-suggestions').html(
@@ -95,5 +122,5 @@ $('#country-search').on('input', function () {
       ''
     )
   );
-  detectClickOnCountryName();
+  detectClickOnCountryName('.dropdown');
 });
