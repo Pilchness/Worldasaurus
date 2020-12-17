@@ -112,12 +112,10 @@ $(document).ready(function () {
   });
 
   $('#info').click(function () {
-    console.log('info');
     $('#info-modal').modal('toggle');
   });
 
   $('#quiz').click(function () {
-    console.log('quiz');
     $('#quiz-modal').modal('show');
   });
 

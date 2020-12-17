@@ -43,7 +43,6 @@ export const locateIcon = (id) => {
 };
 
 export const getWeatherData = (cityArray) => {
-  //console.log('getting weather');
   const generateCityCodeString = () => {
     let cityCodeString = cityArray[0];
     for (let i = 1; i < 10; i++) {
@@ -130,34 +129,8 @@ export const getWeatherData = (cityArray) => {
 };
 
 export const handleWeatherData = (country) => {
-  // let countryObjects;
   console.log('getting weather');
-  // $.ajax({
-  //   type: 'POST',
-  //   url: 'libs/php/geodataDecode.php',
-  //   data: { action: 'test' },
-  //   dataType: 'json',
-  //   success: function (response) {
-  //     countryObjects = response.geoData.features;
-  //     getCities(getCountryCode(country));
-  //   },
-  //   error: function (errorThrown) {
-  //     console.log(errorThrown);
-  //   }
-  // });
-
   getCities(country.properties.iso_a2);
-
-  // const getCountryCode = (country) => {
-  //   let countryCode = '';
-  //   countryObjects.forEach((countryDataObject) => {
-  //     if (countryDataObject.properties.name.toLowerCase() === country.toLowerCase()) {
-  //       countryCode = countryDataObject.properties.iso_a2;
-  //     }
-  //   });
-  //   return countryCode;
-
-  // };
 };
 
 const weatherIcons = {

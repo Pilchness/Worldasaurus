@@ -17,8 +17,6 @@ $(document).ready(function () {
   //   event.stopPropagation();
   // });
 
-  console.log('ready');
-
   $('#country-search').val('').focus(); //resets input box to empty
 
   // $('#mapstyle').click(function () {

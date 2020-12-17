@@ -2,6 +2,7 @@
 import { currencyInformation } from '../../ajax/getCurrencyInfo.js';
 import { locateIcon } from '../../ajax/getWeatherData.js';
 import { countryCodeLookup, detectClickOnCountryName } from '../../missionControl.js';
+import { poiOverlay } from './poiOverlay.js';
 import * as mapsource from '../../leafletcode/mappingConstants.js';
 
 export const hideAll = (overlay) => {
@@ -193,18 +194,6 @@ export const getCountryData = (ISOcode) => {
         $('#languages-overlay').toggle();
       });
 
-      let poisData = `
-             <ul>
-               <li>POIs: ${population}</li>
-               <li>Area: ${area} km²</li>
-               <li>Region: ${region}</li>
-               <li>Sub Region: ${subregion}</li>
-               <li>Gini Rating: ${giniRating}</li>
-             </ul>
-           `;
-
-      $('#pois-overlay').html(poisData);
-
       $('#menu-pois').on('click', function () {
         hideAll('pois');
         $('#pois-overlay').toggle();
@@ -218,7 +207,6 @@ export const getCountryData = (ISOcode) => {
     dataType: 'json',
     data: { code: ISOcode },
     success: function (response) {
-      console.log(response);
       handleCountryData(response);
     },
     error: function (errorThrown) {

@@ -43,15 +43,11 @@ export const addCountryOutline = (country) => {
   });
 
   const boundaries = countryOutline.getBounds();
-  let code = 841211;
-
+  let code = 841211; //for testing - not used in php file
   //codes: train stations 401190, airports 458106, national monuments 841211, tourist attractions 999333
-
-  console.log(boundaries);
   let longitudeCentre = (boundaries._northEast.lng + boundaries._southWest.lng) / 2;
   let latitudeCentre = (boundaries._northEast.lat + boundaries._southWest.lat) / 2;
   let origin = latitudeCentre + ',' + longitudeCentre;
-  console.log(origin);
   let radius = 3000;
   POIdata(radius, code, origin);
 };

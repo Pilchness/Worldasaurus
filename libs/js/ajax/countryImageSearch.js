@@ -42,7 +42,6 @@ export const getCountryImage = (country) => {
 
           const extraPhotos = () => {
             const photos = result.data.slice(1, 10);
-            console.log(photos);
             let photoDisplayCode = '';
             photos.forEach((photo) => {
               photoDisplayCode += `<img id=${photo.id} class="gallery-photo" src='${photo.urls.raw}&w=50&dpr=2' alt='${photo.alt_description} width: '33%' height: 'auto'; style="padding: 5px; opacity: 1">`;

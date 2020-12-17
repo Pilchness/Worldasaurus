@@ -13,9 +13,6 @@ let parsedGeoDataArray; //parsed geoData array of countries and data
 let countryList; //object containing country names with numbered keys
 
 const countryFocus = (country) => {
-  console.log(country);
-  //console.log(country.properties.name);
-  //$('#search-suggestions').html(`<ul id="suggestion-list" style="margin-top: 14px"></ul>`);
   $('#search-suggestions')
     .hide()
     .html(
@@ -63,8 +60,6 @@ $('#content').html(pageHeader).append(leftMenu);
 let countryCodes;
 
 const generateCountryList = (parsedGeoData) => {
-  console.log();
-  //console.log('pgd', parsedGeoData);
   parsedGeoDataArray = parsedGeoData;
 
   //create object of countries from geodata
@@ -73,7 +68,6 @@ const generateCountryList = (parsedGeoData) => {
     countries[i] = parsedGeoDataArray[i].properties.name.toLowerCase();
   }
   countryList = countries;
-  console.log(countryList);
   countryCodes = generateCountryCodeLookUp(parsedGeoDataArray);
   return countries;
 };
@@ -107,7 +101,6 @@ $('#country-search').on('input', function () {
       .replace(/'/g, '\x27')
       .replace(/[\u0300-\u036f]/g, '');
 
-    console.log(typeof countryNameSanitized);
     // console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown"
     // onClick="setInputVal('${country.properties.name}')"
     // value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);

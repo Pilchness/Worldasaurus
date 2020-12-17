@@ -6,8 +6,6 @@ export const currencyInformation = (currencies, countryName) => {
     type: 'POST',
     url: 'libs/php/getCurrencyData.php',
     success: function (response) {
-      console.log(response.data);
-
       let currenciesData = `<p>The main currency of ${countryName} is the
        ${currencies.name}[${currencies.symbol}] and the current exchange rate (USD) is
         ${response.data[currencies.code]}</p><p>To convert ${
