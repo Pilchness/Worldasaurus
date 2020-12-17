@@ -17,20 +17,23 @@ export const hideAll = (overlay) => {
 };
 
 export const getCountryData = (ISOcode) => {
-  console.log(ISOcode);
-  $.ajax({
-    type: 'POST',
-    url: 'libs/php/getCountryFlagData.php',
-    dataType: 'json',
-    data: { code: ISOcode },
-    success: function (response) {
-      console.log(response);
-      handleCountryData(response);
-    },
-    error: function (errorThrown) {
-      console.log(errorThrown);
-    }
-  });
+  const getCountryName = (ISOcode) => {
+    $.ajax({
+      type: 'POST',
+      url: 'libs/php/getCountryFlagData.php',
+      dataType: 'json',
+      data: { code: ISOcode },
+      success: function (response) {
+        console.log(response);
+        handleCountryData(response);
+      },
+      error: function (errorThrown) {
+        console.log(errorThrown);
+      }
+    });
+  };
+
+  getCountryName(ISOcode);
 
   const handleCountryData = (countryData) => {
     console.log(countryData);
@@ -49,8 +52,35 @@ export const getCountryData = (ISOcode) => {
     const latitude = countryData.data.latlng[0];
     const longitude = countryData.data.latlng[1];
 
-    console.log(currencies);
+    //console.log(currencies);
     currencyInformation(currencies[0], countryName);
+
+    //getCountryName(borders[0]);
+
+    // let bordersDecoded = () => {
+    //   const getCountryName = (ISOcode) => {
+    //     $.ajax({
+    //       type: 'POST',
+    //       url: 'libs/php/getCountryFlagData.php',
+    //       dataType: 'json',
+    //       data: { code: ISOcode },
+    //       success: function (response) {
+    //         console.log(response);
+    //         handleCountryData(response);
+    //       },
+    //       error: function (errorThrown) {
+    //         console.log(errorThrown);
+    //       }
+    //     });
+    //   };
+    //   let bordersString = '';
+    //   borders.forEach((border) => {
+    //     getCountryName(border).then((countryData) => {
+    //       bordersString += countryData + ', ';
+    //     });
+    //   });
+    //   return bordersString;
+    // };
 
     $.ajax({
       url: 'libs/php/getLatLongFromPlacename.php',
@@ -133,17 +163,17 @@ export const getCountryData = (ISOcode) => {
       hideAll('timezones');
       $('#timezones-overlay').toggle();
 
-      let bordersData = `
-             <ul>
-               <li>Borders: ${population}</li>
-               <li>Area: ${area} km²</li>
-               <li>Region: ${region}</li>
-               <li>Sub Region: ${subregion}</li>
-               <li>Gini Rating: ${giniRating}</li>
-             </ul>
-           `;
+      let bordersData = () => {
+        let bordersText = '';
+        borders.length === 0
+          ? (bordersText = `<p>${countryName} has borders with no other countries.</p>`)
+          : borders.length > 1
+          ? (bordersText = `<p>${countryName} has borders with ${borders.length} other countries: </p>${borders}`)
+          : (bordersText = `<p>${countryName} only has a border with ${borders[0]}.</p></figure>`);
+        return bordersText;
+      };
 
-      $('#borders-overlay').html(bordersData);
+      $('#borders-overlay').html(bordersData());
 
       $('#menu-borders').on('click', function () {
         hideAll('borders');
@@ -186,101 +216,3 @@ export const getCountryData = (ISOcode) => {
     });
   };
 };
-//             let bordersInfo = `<figure id="figure-border-overlay" style="display: none; background-color: rgba(63, 127, 191, 0.7);
-//       margin-top: 39px; margin-left:20px; padding: 5px; width:354px; height: 231px; color: white; position: absolute; top: 0; left: 0;">
-
-// ${
-//   borders.length === 0
-//     ? `<p>${countryName} has borders with no other countries.</p>`
-//     : borders.length > 1
-//     ? `<p>${countryName} has borders with ${borders.length} other countries: </p>${decodedBordersCode.slice(
-//         0,
-//         decodedBordersCode.length - 2
-//       )}`
-//     : `<p>${countryName} only has a border with ${decodedBordersArray[0]}.</p></figure>`
-// }`;
-
-//             $('#menu-facts').on('click', function () {
-//               $('#info-overlay').html(facts);
-//               $('#country-image-title').css({ color: 'transparent', transition: 'color 2s' });
-//               $('#figure-facts-overlay').fadeIn(3000, function () {
-//                 $('#info-menu-background').on('click', function () {
-//                   $('#figure-facts-overlay').fadeOut(3000, function () {});
-//                 });
-//               });
-//             });
-
-//             $('#menu-borders').on('click', function () {
-//               $('#info-overlay').html(bordersInfo);
-//               $('#country-image-title').css({ color: 'transparent', transition: 'color 2s' });
-//               $('#figure-border-overlay').fadeIn(3000, function () {});
-//             });
-//           }
-//         },
-//         error: function (errorThrown) {
-//           console.log(errorThrown);
-//         }
-//       });
-//     };
-
-//     getISOCountryNames();
-
-//     // specify popup options
-//   };
-// };
-
-//let decodedBordersCode = '';
-//let decodedBordersArray = [];
-
-// const getISOCountryNames = () => {
-//   let country = '';
-//   $.ajax({
-//     type: 'POST',
-//     url: 'libs/php/geodataDecode.php',
-//     dataType: 'json',
-//     data: { action: 'all' },
-//     success: function (response) {
-//       //console.log(response.geoData.features);
-//       let countryData = response.geoData.features;
-//       console.log(countryData[15]);
-//       for (let j = 0; j < borders.length; j++) {
-//         for (let i = 0; i < countryData.length; i++) {
-//           //console.log(countryData[i].properties.iso_a3, borders[j]);
-//           if (countryData[i].properties.iso_a3 === borders[j]) {
-//             country =
-//               countryData[i].properties.name.charAt(0).toUpperCase() + countryData[i].properties.name.slice(1);
-//             decodedBordersArray.push(country);
-//             //console.log(country);
-//           }
-//         }
-//       }
-//       console.log(decodedBordersArray);
-//       if (decodedBordersArray.length > 0) {
-//         decodedBordersArray.map((country) => {
-//           decodedBordersCode += `${country}, `;
-//         });
-//console.log(decodedBordersCode);
-//             L.marker([latitude, longitude])
-//               .addTo(mapsource.map)
-//               .bindPopup(
-//                 `<b><h3>${countryName}</h3></b><br/><img src=${flagLink} alt=${
-//                   countryName + ' flag'
-//                 } width=100px /><p>${countryName} is a country of population ${population}, located in ${subregion}. It has an area of ${area}km² and its capital is ${capital}.
-// </p>`,
-//                 { className: 'leaflet-pop' }
-//               )
-//               .openPopup();
-//$('#selected-country').text(countryName);
-//   $('#place-info').html(`
-//       <div>
-//         <ul>
-//           <li>Population: ${population}</li>
-//           <li>Area: ${area} km²</li>
-//           <li>Region: ${region}</li>
-//           <li>Sub Region: ${subregion}</li>
-//           <li>Timezones</li>
-//           <li>Currencies</li>
-//           <li>Borders</li>
-//           <li>Languages</li>
-//         </ul>
-//       </div>`)

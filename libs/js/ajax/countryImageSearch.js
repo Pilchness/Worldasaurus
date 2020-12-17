@@ -75,7 +75,7 @@ export const getCountryImage = (country) => {
             let photoId = $(this).attr('id');
             result.data.slice(1, 10).forEach((photoData) => {
               if (photoData.id === photoId) {
-                hideAll('photos');
+                hideAll();
                 $('#country-image').attr('src', photoData.urls.raw);
                 $('#country-image').attr('alt', photoData.alt_description);
                 $('#country-image-title').text(photoData.alt_description);
