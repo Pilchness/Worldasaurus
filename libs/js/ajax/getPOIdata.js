@@ -2,8 +2,10 @@ import * as mapsource from '../leafletcode/mappingConstants.js';
 import { locateIcon } from './getWeatherData.js';
 import { poiOverlay } from '../modals/infoModal/poiOverlay.js';
 
-export const POIdata = (radius, POIcode, origin) => {
-  console.log('getting POI data');
+const map = mapsource.map;
+
+export const POIdata = (radius, POIcode, origin, countryBounds) => {
+  console.log(countryBounds);
   $.ajax({
     type: 'GET',
     url: 'libs/php/getMapquestPOIdata.php',
@@ -16,13 +18,15 @@ export const POIdata = (radius, POIcode, origin) => {
       if (response.data.searchResults) {
         const poiData = response.data.searchResults;
         let poiTable = '';
+        console.log(poiData);
         //console.log('getting city data', result.data);
         poiData.map((data) => {
-          poiTable += `<tr><td class="table-pois">${data.name}</td><td>${choosePOISymbol(
-            data.fields.group_sic_code
-          )}</td><td>${data.fields.city}</td><td>${data.fields.phone}</td><td class="locate-poi" value=${
-            data.fields.id
-          } lat=${data.fields.lat} long=${data.fields.lng} name=${data.name}>${locateIcon(data.fields.id)}</td></tr>`; //need to convert temp from K to C
+          poiTable += `<tr>
+          <td>${choosePOISymbol(data.fields.group_sic_code)}</td>
+          <td class="table-pois">${data.name}</td>
+          <td class="locate-poi" value=${data.fields.id} lat=${data.fields.lat} long=${data.fields.lng} name='${
+            data.name
+          }'>${locateIcon(data.fields.id)}</td></tr>`;
         });
 
         //console.log(poiTable);
@@ -37,7 +41,17 @@ export const POIdata = (radius, POIcode, origin) => {
         //$('#poi-data-test').text('hello');
         //$('#poi-data-test').html(poiTable);
         //poiTable.append($('#poi-data-test'));
-        $(poiTable).appendTo('#poi-data-test tbody');
+
+        // const flyBackToCountry = () => {
+        //   console.log('flying');
+        //   map.flyToBounds(countryBounds, 14, {
+        //     animate: true,
+        //     duration: 3
+        //   });
+        // };
+        $(poiTable).appendTo('#poi-data-table tbody');
+        // const tableFooter = `<td></td><td><button>Return to country view</button></td>`;
+        // $(tableFooter).appendTo('#poi-data-table tbody');
 
         $('.locate-poi').hover(
           function () {
@@ -51,7 +65,14 @@ export const POIdata = (radius, POIcode, origin) => {
         );
 
         $('.locate-poi').on('click', function () {
-          let poiName = $(this).attr('name');
+          let poiName = $(this)
+            .attr('name')
+            .slice(0, 20)
+            .normalize('NFD')
+            .replace(/'/g, '\x27')
+            .replace(/[\u0300-\u036f]/g, '');
+
+          console.log(poiName);
           let lat = $(this).attr('lat');
           let long = $(this).attr('long');
           L.marker([lat, long])
@@ -63,7 +84,31 @@ export const POIdata = (radius, POIcode, origin) => {
               opacity: 0.75,
               className: 'poi-tooltip'
             })
-            .addTo(mapsource.map);
+            .on('click', function (e) {
+              map.setView([e.latlng.lat, e.latlng.lng], 15, {
+                animate: true,
+                duration: 3
+              });
+            })
+            .addTo(map);
+          //map.panTo(new L.LatLng(lat, long));
+
+          map.flyTo([lat, long], map.getZoom(), {
+            animate: true,
+            duration: 3
+          });
+
+          // map.setView([lat, long], map.getZoom(), {
+          //   animate: true,
+          //   pan: {
+          //     duration: 3
+          //   }
+          // });
+
+          // map.setView([lat, long], 15, {
+          //   animate: true,
+          //   duration: 3
+          // });
         });
       }
     },
@@ -109,8 +154,9 @@ const poiIcons = {
 };
 
 const choosePOISymbol = (poiCategory) => {
+  poiCategory = parseInt(poiCategory);
   const shops = [531102, 531104, 533101, 541101, 541103, 541105, 543102, 564103, 571216];
-  const tourist = [472401, 472402, 581226, 701101, 841201, 841211, 842201];
+  const tourist = [472401, 472402, 581226, 701101, 841201, 841211, 842201, 999319];
   const buildings = [152130, 154235, 651303, 651401];
   const flag = [799290];
   const diy = [521138, 523107, 525104, 526104];
@@ -121,31 +167,21 @@ const choosePOISymbol = (poiCategory) => {
 
   if (shops.includes(poiCategory)) {
     return poiIcons.shop;
-  }
-
-  if (tourist.includes(poiCategory)) {
+  } else if (tourist.includes(poiCategory)) {
     return poiIcons.tourist;
-  }
-  if (buildings.includes(poiCategory)) {
+  } else if (buildings.includes(poiCategory)) {
     return poiIcons.building;
-  }
-  if (flag.includes(poiCategory)) {
+  } else if (flag.includes(poiCategory)) {
     return poiIcons.flag;
-  }
-  if (diy.includes(poiCategory)) {
+  } else if (diy.includes(poiCategory)) {
     return poiIcons.diy;
-  }
-  if (maritime.includes(poiCategory)) {
+  } else if (maritime.includes(poiCategory)) {
     return poiIcons.maritime;
-  }
-  if (business.includes(poiCategory)) {
+  } else if (business.includes(poiCategory)) {
     return poiIcons.business;
-  }
-  if (transport.includes(poiCategory)) {
+  } else if (transport.includes(poiCategory)) {
     return poiIcons.transport;
-  }
-  if (agriculture.includes(poiCategory)) {
+  } else if (agriculture.includes(poiCategory)) {
     return poiIcons.agriculture;
-  }
-  return poiIcons.flag;
+  } else return poiIcons.flag;
 };

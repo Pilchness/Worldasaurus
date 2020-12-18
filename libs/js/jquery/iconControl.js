@@ -1,7 +1,7 @@
 //import * as mapsource from '../leafletcode/mappingConstants.js';
 
 const closeModals = () => {
-  const modalList = ['settings', 'info', 'map', 'weather', 'quiz'];
+  const modalList = ['info', 'map', 'weather', 'quiz'];
 
   modalList.forEach((modal) => {
     let modalName = `#${modal}-modal-main`;
@@ -15,15 +15,6 @@ const closeModals = () => {
 };
 
 $(document).ready(function () {
-  $('#settings-modal-header, #settings').on('click', function (e) {
-    closeModals();
-    $('#settings-modal-main').delay(0).fadeOut('slow');
-    setTimeout(function () {
-      $('#settings-modal-main').modal('toggle');
-    }, 300);
-    e.stopPropagation();
-  });
-
   $('#info-modal-header, #info').on('click', function (e) {
     closeModals();
     $('#info-modal-main').delay(0).fadeOut('slow');
@@ -102,22 +93,22 @@ $(document).ready(function () {
   //   e.stopPropagation();
   // });
 
-  $('#settings-modal').on('hidden.bs.modal', function () {
-    //$('#modal-fader').removeClass('enterSlowlyLeft').addClass('leaveSlowlyLeft');
-    $('#countrySearch').val('').focus();
-  });
+  // $('#settings-modal').on('hidden.bs.modal', function () {
+  //   //$('#modal-fader').removeClass('enterSlowlyLeft').addClass('leaveSlowlyLeft');
+  //   $('#countrySearch').val('').focus();
+  // });
 
-  $('#settings-modal').on('hidden.bs.modal', function (e) {
-    $('#modal-fader').removeClass('leaveSlowlyLeft').addClass('enterSlowlyLeft');
-  });
+  // $('#settings-modal').on('hidden.bs.modal', function (e) {
+  //   $('#modal-fader').removeClass('leaveSlowlyLeft').addClass('enterSlowlyLeft');
+  // });
 
-  $('#info').click(function () {
-    $('#info-modal').modal('toggle');
-  });
+  // $('#info').click(function () {
+  //   $('#info-modal').modal('toggle');
+  // });
 
-  $('#quiz').click(function () {
-    $('#quiz-modal').modal('show');
-  });
+  // $('#quiz').click(function () {
+  //   $('#quiz-modal').modal('show');
+  // });
 
   // $('#stadia').click(function () {
   //   console.log('stadia');

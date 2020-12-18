@@ -22,17 +22,23 @@ export const mapModal = () => {
 
 const mapModalContents = `<div class="modal-body" style="padding-top: 0">
     <div style="display: flex; align-items: center; justify-content: space-around; margin: auto; flex-wrap: wrap">
+      <button id="arc" class="map-button" style="padding: 5px">
+        <img src="images/arcbutton.png" alt="map style 1" />
+      </button>
       <button id="stadia" class="map-button" style="padding: 5px">
-        <img src="images/smapthumb.png" alt="map style 1" />
+        <img src="images/stadiabutton.png" alt="map style 2" />
       </button>
-      <button id="here" class="map-button" style="padding: 5px">
-        <img src="images/hmapthumb.png" alt="map style 2" />
+      <button id="stamen" class="map-button" style="padding: 5px">
+        <img src="images/stamenbutton.png" alt="map style 3" />
       </button>
-      <button id="jawg" class="map-button" style="padding: 5px">
-        <img src="images/jmapthumb.png" alt="map style 3" />
+      <button id="esri" class="map-button" style="padding: 5px">
+        <img src="images/esributton.png" alt="map style 4" />
       </button>
-      <button id="forest" class="map-button" style="padding: 5px">
-        <img src="images/fmapthumb.png" alt="map style 4" />
+       <button id="usgs" class="map-button" style="padding: 5px">
+        <img src="images/usgsbutton.png" alt="map style 3" />
+      </button>
+      <button id="gibs" class="map-button" style="padding: 5px">
+        <img src="images/gibsbutton.png" alt="map style 4" />
       </button>
     </div>
   </div>`;

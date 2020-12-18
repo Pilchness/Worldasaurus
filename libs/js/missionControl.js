@@ -41,6 +41,10 @@ export const detectClickOnCountryName = (targetButton) => {
       if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
         //console.log('matched');
         countryFocus(parsedGeoDataArray[j]);
+        //reset country outline and data when menu reset button is pressed
+        $('#settings').on('click', function () {
+          countryFocus(parsedGeoDataArray[j]);
+        });
       }
     }
   });
@@ -52,7 +56,7 @@ export const detectClickOnCountryName = (targetButton) => {
 //   };
 // });
 
-mapsource.arc(); //default map style
+//mapsource.arc(); //default map style
 const currentLocation = getCurrentNavCords();
 
 $('#content').html(pageHeader).append(leftMenu);

@@ -107,10 +107,12 @@
 
 .info-overlay {
   position: absolute;
-  background-color: rgba(63, 127, 191, 0.7);
+  background-color: rgba(63, 127, 191, 0.9);
   top: 0px;
   left: 0px;
   padding: 10px;
+  width: 365px;
+  color: white;
 }
 
 .modal-button-container.info-modal {
@@ -163,19 +165,24 @@
   -khtml-box-shadow: inset 0px 0px 10px lightgray;
 } */
 
-#city-weather-table {
+#city-weather-table,
+#poi-data-table {
   width: 100%;
   height: 100%;
   table-layout: fixed;
+  font-size: 12px;
 }
 
 td {
   width: 100%;
   text-align: left;
   vertical-align: middle;
+  padding: 1px;
 }
 
-.city-tooltip {
+.city-tooltip,
+.poi-tooltip,
+.capital-city-tooltip {
   position: absolute;
   padding: 4px;
   background-color: rgba(70, 51, 155, 0.8);
@@ -190,19 +197,12 @@ td {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
+.poi-tooltip {
+  background-color: rgba(23, 124, 94, 0.8);
+}
+
 .capital-city-tooltip {
-  position: absolute;
-  padding: 4px;
   background-color: rgba(189, 137, 189, 0.8);
-  border: 0px solid #000;
-  color: #000;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  pointer-events: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 #currency-container {
@@ -214,6 +214,7 @@ td {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 345px;
 }
 
 /*
@@ -336,6 +337,21 @@ td {
     width: 285px;
     height: auto;
     display: block;
+  }
+
+  .info-overlay {
+    width: 285px;
+  }
+
+  .gallery-photo {
+    width: 88px;
+  }
+
+  #photos-gallery {
+    width: 265px;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 }
 
