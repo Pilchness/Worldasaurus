@@ -1,8 +1,6 @@
-//import * as mapsource from './mapsources.js';
 import { currencyInformation } from '../../ajax/getCurrencyInfo.js';
 import { locateIcon } from '../../ajax/getWeatherData.js';
 import { countryCodeLookup, detectClickOnCountryName } from '../../missionControl.js';
-import { poiOverlay } from './poiOverlay.js';
 import * as mapsource from '../../leafletcode/mappingConstants.js';
 
 export const hideAll = (overlay) => {
@@ -22,7 +20,6 @@ export const getCountryData = (ISOcode) => {
   const countryCodes = countryCodeLookup();
 
   const handleCountryData = (countryData) => {
-    console.log(countryData);
     const countryName = countryData.data.name;
     const flagLink = countryData.data.flag;
     const population = countryData.data.population;
@@ -35,22 +32,9 @@ export const getCountryData = (ISOcode) => {
     const subregion = countryData.data.subregion;
     const giniRating = countryData.data.gini;
     const area = countryData.data.area;
-    //const latitude = countryData.data.latlng[0];
-    //const longitude = countryData.data.latlng[1];
 
-    console.log(languages);
     currencyInformation(currencies[0], countryName);
     $('#flag-container').html(`<img width='80px' height='50px' src='${flagLink}' alt='${countryName} flag'/>`);
-
-    // let bordersDecoded = () => {
-    //   let bordersString = '';
-    //   borders.forEach((border) => {
-    //     fetchCountryData(border).then((countryData) => {
-    //       bordersString += countryData + ', ';
-    //     });
-    //   });
-    //   return bordersString;
-    // };
 
     $.ajax({
       url: 'libs/php/getLatLongFromPlacename.php',
@@ -61,7 +45,6 @@ export const getCountryData = (ISOcode) => {
       },
 
       success: function (result) {
-        console.log(result.data.results[0].geometry);
         let id = result.data.results[0].components.postcode;
 
         let factsData = `
@@ -78,7 +61,6 @@ export const getCountryData = (ISOcode) => {
         $('#facts-overlay').html(factsData);
 
         $('#menu-facts').on('click', function () {
-          console.log('menu facts');
           hideAll('facts');
           $('#facts-overlay').toggle();
         });
@@ -132,72 +114,61 @@ export const getCountryData = (ISOcode) => {
     $('#menu-timezones').on('click', function () {
       hideAll('timezones');
       $('#timezones-overlay').toggle();
+    });
 
-      // const newCountry = (countryName) => {
-      //   console.log(countryName);
-      //   $('#country-search').val(countryName);
-      // };
-
-      let bordersData = () => {
-        console.log('getting borders');
-        let listOfBorderCountries = '';
-        for (let i = 0; i < borders.length; i++) {
-          if (countryCodes[borders[i]]) {
-            listOfBorderCountries += `<button class="border-button" onClick={$('#country-search').val('${
-              countryCodes[borders[i]]
-            }')}>${countryCodes[borders[i]]}</button>`;
-          }
+    let bordersData = () => {
+      let listOfBorderCountries = '';
+      for (let i = 0; i < borders.length; i++) {
+        if (countryCodes[borders[i]]) {
+          listOfBorderCountries += `<button class="border-button" onClick={$('#country-search').val('${
+            countryCodes[borders[i]]
+          }')}>${countryCodes[borders[i]]}</button>`;
         }
-        // listOfBorderCountries =
-        //   listOfBorderCountries.slice(0, -1) +
-        //   `<span> and </span><button class="border-button">${
-        //     countryCodes[borders[borders.length - 1]]
-        //   }</button><span>.</span>`;
+      }
 
-        let bordersText = '';
-        borders.length === 0
-          ? (bordersText = `<p>${countryName} has borders with no other countries.</p>`)
-          : borders.length > 1
-          ? (bordersText = `<p>${countryName} has borders with ${borders.length} other countries: </p>${listOfBorderCountries}`)
-          : (bordersText = `<p>${countryName} only has a border with: <button class="border-button" onClick={$('#country-search').val('${
-              countryCodes[borders[0]]
-            }')}>${countryCodes[borders[0]]}</button></p>`);
-        return bordersText;
-      };
+      let bordersText = '';
+      borders.length === 0
+        ? (bordersText = `<p>${countryName} has borders with no other countries.</p>`)
+        : borders.length > 1
+        ? (bordersText = `<p>${countryName} has borders with ${borders.length} other countries: </p>${listOfBorderCountries}`)
+        : (bordersText = `<p>${countryName} only has a border with: <button class="border-button" onClick={$('#country-search').val('${
+            countryCodes[borders[0]]
+          }')}>${countryCodes[borders[0]]}</button></p>`);
+      return bordersText;
+    };
 
-      $('#borders-overlay').html(bordersData());
-      detectClickOnCountryName('.border-button');
+    $('#borders-overlay').html(bordersData());
+    detectClickOnCountryName('.border-button');
 
-      $('#menu-borders').on('click', function () {
-        hideAll('borders');
-        $('#borders-overlay').toggle();
-      });
+    $('#menu-borders').on('click', function () {
+      hideAll('borders');
+      $('#borders-overlay').toggle();
+    });
 
-      let languagesData = () => {
-        let introSentence =
-          languages.length > 1
-            ? `<p>The official languages of ${countryName} are:</p>`
-            : `<p>The official language of ${countryName} is:</p>`;
+    let languagesData = () => {
+      let introSentence =
+        languages.length > 1
+          ? `<p>The official languages of ${countryName} are:</p>`
+          : `<p>The official language of ${countryName} is:</p>`;
 
-        return (
-          introSentence +
-          `${languages.map((language) => {
-            return ` ${language.name}`;
-          })}`
-        );
-      };
+      return (
+        introSentence +
+        `${languages.map((language) => {
+          return ` ${language.name}`;
+        })}`
+      );
+    };
 
-      $('#languages-overlay').html(languagesData);
+    $('#languages-overlay').html(languagesData);
 
-      $('#menu-languages').on('click', function () {
-        hideAll('languages');
-        $('#languages-overlay').toggle();
-      });
+    $('#menu-languages').on('click', function () {
+      hideAll('languages');
+      $('#languages-overlay').toggle();
+    });
 
-      $('#menu-pois').on('click', function () {
-        hideAll('pois');
-        $('#pois-overlay').toggle();
-      });
+    $('#menu-pois').on('click', function () {
+      hideAll('pois');
+      $('#pois-overlay').toggle();
     });
   };
 

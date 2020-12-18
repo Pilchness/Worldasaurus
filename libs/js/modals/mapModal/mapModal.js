@@ -20,25 +20,26 @@ export const mapModal = () => {
     </div>`;
 };
 
-const mapModalContents = `<div class="modal-body" style="padding-top: 0">
-    <div style="display: flex; align-items: center; justify-content: space-around; margin: auto; flex-wrap: wrap">
-      <button id="arc" class="map-button" style="padding: 5px">
-        <img src="images/arcbutton.png" alt="map style 1" />
+const mapModalContents = `<div class="modal-body" style="padding-top: 0; text-align: center">
+<h4>Choose a map style</h4>
+    <div id="map-button-container">
+      <button id="arc" class="map-button">
+        <img src="images/arcbutton.png" alt="map style 1" class="contain"/>
       </button>
-      <button id="stadia" class="map-button" style="padding: 5px">
-        <img src="images/stadiabutton.png" alt="map style 2" />
+      <button id="stadia" class="map-button">
+        <img src="images/stadiabutton.png" alt="map style 2" class="contain"/>
       </button>
-      <button id="stamen" class="map-button" style="padding: 5px">
-        <img src="images/stamenbutton.png" alt="map style 3" />
+      <button id="carto" class="map-button">
+        <img src="images/cartobutton.png" alt="map style 3" class="contain"/>
       </button>
-      <button id="esri" class="map-button" style="padding: 5px">
-        <img src="images/esributton.png" alt="map style 4" />
+      <button id="esri" class="map-button">
+        <img src="images/esributton.png" alt="map style 4" class="contain"/>
       </button>
-       <button id="usgs" class="map-button" style="padding: 5px">
-        <img src="images/usgsbutton.png" alt="map style 3" />
+       <button id="usgs" class="map-button">
+        <img src="images/usgsbutton.png" alt="map style 3" class="contain"/>
       </button>
-      <button id="gibs" class="map-button" style="padding: 5px">
-        <img src="images/gibsbutton.png" alt="map style 4" />
+      <button id="gibs" class="map-button">
+        <img src="images/gibsbutton.png" alt="map style 4" class="contain"/>
       </button>
     </div>
   </div>`;

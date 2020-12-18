@@ -36,10 +36,10 @@ $capitalCityQuizQuestions = [
   $randomCountries[3]->capital ? $randomCountries[3]->capital : 'No Capital',
 ];
 
-$buttonStyle = "\"width: 20em; height: 3em; margin: 2px\"";
-$infoStyle = "\"width: 8em; height: 3em; margin: 2px\"";
+$buttonStyle = "\"width: 140px; height: 2em; margin: 1px\"";
+$infoStyle = "\"width: 140px; height: 2em; margin: 1px\"";
 
-echo '<h4>' . $capitalCityQuizQuestions[0] . '</h4><br />';
+echo '<h5>' . $capitalCityQuizQuestions[0] . '</h5><br />';
 
 $correctAnswer =
   '<button id="quiz-1" value=true class="btn btn-secondary" style=' .

@@ -1,7 +1,6 @@
 import * as mapsource from '../leafletcode/mappingConstants.js';
 
 export const getCities = (countryCode) => {
-  //console.log(countryCode);
   $.ajax({
     type: 'POST',
     url: 'libs/php/cityWeatherDecode.php',
@@ -15,7 +14,6 @@ export const getCities = (countryCode) => {
           matchingCities.push(cityDataObject.id);
         }
       });
-      //console.log(response);
       getWeatherData(matchingCities);
     },
     error: function (errorThrown) {
@@ -62,10 +60,8 @@ export const getWeatherData = (cityArray) => {
 
     success: function (result) {
       if (result.status.name === 'ok') {
-        //console.log(result.data);
         const cityData = result.data;
         let cityWeatherTable = '';
-        //console.log('getting city data', result.data);
         cityData.map((data) => {
           cityWeatherTable += `<tr><td>${chooseWeatherSymbol(data.weather[0].description)}</td><td class="table-city">${
             data.name
@@ -74,21 +70,8 @@ export const getWeatherData = (cityArray) => {
           )}</td><td class="locate-city" value=${data.id} lat=${data.coord.lat} long=${data.coord.lon} name=${
             data.name
           }>${locateIcon(data.id)}</td></tr>`; //need to convert temp from K to C
-          // if ($('#cities-button').val() === 'on' || true) {
-          //   L.marker([data.coord.lat, data.coord.lon])
-          //     .bindTooltip(data.name, {
-          //       permanent: false,
-          //       direction: 'auto'
-          //     })
-          //     .addTo(mapsource.map);
-          // }
         });
 
-        // $('#weather').on('click', function () {
-
-        // });
-
-        //console.log(cityWeatherTable);
         $('#city-weather-table').find('tr:gt(0)').remove();
         $('#weather-warning').remove();
         $(cityWeatherTable).appendTo('#city-weather-table tbody');
@@ -122,14 +105,12 @@ export const getWeatherData = (cityArray) => {
     },
 
     error: function (errorThrown) {
-      //console.log(generateCityCodeString());
       console.log(errorThrown);
     }
   });
 };
 
 export const handleWeatherData = (country) => {
-  console.log('getting weather');
   getCities(country.properties.iso_a2);
 };
 

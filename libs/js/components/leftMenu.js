@@ -1,7 +1,7 @@
 export const leftMenu = () => {
   return `<div id="logo-nav">
       <ul id="logo-list">
-        <li id="settings">
+        <li id="reset">
           <svg
             width="50px"
             height="50px"

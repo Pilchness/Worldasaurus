@@ -5,21 +5,17 @@ import { poiOverlay } from '../modals/infoModal/poiOverlay.js';
 const map = mapsource.map;
 
 export const POIdata = (radius, POIcode, origin, countryBounds) => {
-  console.log(countryBounds);
   $.ajax({
     type: 'GET',
     url: 'libs/php/getMapquestPOIdata.php',
     dataType: 'json',
     data: { radius: radius, code: POIcode, origin: origin },
     success: function (response) {
-      console.log('populating POI data');
       $('#pois-overlay').html(poiOverlay());
 
       if (response.data.searchResults) {
         const poiData = response.data.searchResults;
         let poiTable = '';
-        console.log(poiData);
-        //console.log('getting city data', result.data);
         poiData.map((data) => {
           poiTable += `<tr>
           <td>${choosePOISymbol(data.fields.group_sic_code)}</td>
@@ -29,29 +25,10 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
           }'>${locateIcon(data.fields.id)}</td></tr>`;
         });
 
-        //console.log(poiTable);
-        //$('#poi-table').text('HELLO');
-
-        //$('#poi-table').find('tr:gt(0)').remove();
-        $('#menu-pois').on('click', function () {
-          console.log('clicked');
-        });
+        $('#menu-pois').on('click', function () {});
         $('#poi-warning').remove();
-        console.log('warning removed');
-        //$('#poi-data-test').text('hello');
-        //$('#poi-data-test').html(poiTable);
-        //poiTable.append($('#poi-data-test'));
 
-        // const flyBackToCountry = () => {
-        //   console.log('flying');
-        //   map.flyToBounds(countryBounds, 14, {
-        //     animate: true,
-        //     duration: 3
-        //   });
-        // };
         $(poiTable).appendTo('#poi-data-table tbody');
-        // const tableFooter = `<td></td><td><button>Return to country view</button></td>`;
-        // $(tableFooter).appendTo('#poi-data-table tbody');
 
         $('.locate-poi').hover(
           function () {
@@ -72,7 +49,6 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
             .replace(/'/g, '\x27')
             .replace(/[\u0300-\u036f]/g, '');
 
-          console.log(poiName);
           let lat = $(this).attr('lat');
           let long = $(this).attr('long');
           L.marker([lat, long])
@@ -91,24 +67,11 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
               });
             })
             .addTo(map);
-          //map.panTo(new L.LatLng(lat, long));
 
           map.flyTo([lat, long], map.getZoom(), {
             animate: true,
             duration: 3
           });
-
-          // map.setView([lat, long], map.getZoom(), {
-          //   animate: true,
-          //   pan: {
-          //     duration: 3
-          //   }
-          // });
-
-          // map.setView([lat, long], 15, {
-          //   animate: true,
-          //   duration: 3
-          // });
         });
       }
     },

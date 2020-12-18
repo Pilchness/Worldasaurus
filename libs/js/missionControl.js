@@ -1,4 +1,3 @@
-import * as mapsource from './leafletcode/mappingConstants.js';
 import * as layeradd from './leafletcode/addToMapLayer.js';
 import { getCurrentNavCords } from './leafletcode/currentLocation.js';
 import { getListOfPossibleCountries } from './leafletcode/countrySearch.js';
@@ -24,8 +23,6 @@ const countryFocus = (country) => {
     value="${country.properties.name}">${country.properties.name}</button></li></ul>`
     )
     .fadeIn(1500);
-  //const countryISO = getCountryISOCode(country);
-  //const tooltipHTML = `<figure><h5>${country.properties.name}</h5><p>${country.properties.name}</p></figure>`;
 
   layeradd.addCountryOutline(country);
   getCountryImage(country.properties.name.split(' ').join('_'));
@@ -37,27 +34,17 @@ const countryFocus = (country) => {
 export const detectClickOnCountryName = (targetButton) => {
   $(targetButton).on('click', function () {
     for (let j = 0; j < parsedGeoDataArray.length; j++) {
-      //console.log(parsedGeoDataArray[j].properties.name, $('#country-search').val());
       if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
-        //console.log('matched');
         countryFocus(parsedGeoDataArray[j]);
-        //reset country outline and data when menu reset button is pressed
-        $('#settings').on('click', function () {
+        $('#reset').on('click', function () {
           countryFocus(parsedGeoDataArray[j]);
         });
       }
     }
   });
 };
-// $(document).ready(function () {
-//   var obj = document.getElementById('country-search');
-//   obj.appendChild = function () {
-//     alert('changed!');
-//   };
-// });
 
-//mapsource.arc(); //default map style
-const currentLocation = getCurrentNavCords();
+const currentLocation = getCurrentNavCords(); //do not remove
 
 $('#content').html(pageHeader).append(leftMenu);
 
@@ -105,16 +92,13 @@ $('#country-search').on('input', function () {
       .replace(/'/g, '\x27')
       .replace(/[\u0300-\u036f]/g, '');
 
-    // console.log(`<li style="margin: 1px;"><button id="${country.properties.name}" class="dropdown"
-    // onClick="setInputVal('${country.properties.name}')"
-    // value="${country.properties.name}">${country.properties.name.slice(0, 20)}</button></li>`);
     return `<li style="margin: 1px;"><button id="${countryNameSanitized}" class="dropdown" 
     onClick="setInputVal('${countryNameSanitized}')"  
     value="${countryNameSanitized}">${countryNameSanitized}</button></li>`;
   });
 
   $('#search-suggestions').html(
-    `<ul id="suggestion-list" style="margin-top: 18px; width: 300px">${dropdownSuggestions.slice(0, 30)}</ul>`.replace(
+    `<ul id="suggestion-list" style="margin-top: 18px; width: 300px">${dropdownSuggestions.slice(0, 10)}</ul>`.replace(
       /,/g,
       ''
     )

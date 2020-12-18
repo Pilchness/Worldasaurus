@@ -1,17 +1,16 @@
 import { hideAll } from '../modals/infoModal/countryData.js';
 
 export const currencyInformation = (currencies, countryName) => {
-  console.log('getting currency information');
   $.ajax({
     type: 'POST',
     url: 'libs/php/getCurrencyData.php',
     success: function (response) {
       let currenciesData = `<p>The main currency of ${countryName} is the
-       ${currencies.name}[${currencies.symbol}] and the current exchange rate (USD) is
-        ${response.data[currencies.code]}</p><p>To convert ${
-        currencies.name
-      } into US dollars, enter an amount below.</p>
-         <div id="currency-container"><div id="search-box">
+       ${currencies.name} (${currencies.symbol}) and the current exchange rate (USD) is
+        ${response.data[currencies.code]}</p><h5>Currency Converter</h5><p>Enter number of ${currencies.symbol}:</p>
+
+         <div id="currency-container">
+         <div id="search-box" style="width: 50%">
           <div style="vertical-align: top">
             <input
               id="currency-exchange"
@@ -20,8 +19,8 @@ export const currencyInformation = (currencies, countryName) => {
               type="number"
               aria-label="Number"
             />
-          </div ><p style="font-size: 10px">Enter amount of ${currencies.symbol} to convert.</p></div>
-          <div style="padding-left: 10px"><span style="font-size: 18px">is $<span id="conversion"></span></span></div>
+          </div ></div>
+          <div style="padding-left: 10px"><span style="font-size: 14px">is $<span id="conversion"></span></span></div>
           <script>$('#currency-exchange').change(function () {
   $('#conversion').text(
     (

@@ -11,7 +11,6 @@ export const getCountryImage = (country) => {
 
     success: function (result) {
       if (result.status.name === 'ok') {
-        //let randomImage = Math.floor(Math.Rand * 10);
         if (result.data[0]) {
           let src = result.data[0].urls.raw + '&w=235&dpr=2';
           let alt = result.data[0].alt_description;
@@ -22,17 +21,33 @@ export const getCountryImage = (country) => {
           $('#info-overlay').text('');
           const data = result.data[0];
 
-          let photographerInfo = `
-             <ul>
-               <li>Photographer: ${data.user.name}</li>
-               <li>Portfolio: ${data.user.portfolio_url}</li>
-               <li>Home Location: ${data.user.locatio}</li>
-               <li>Twitter Name: ${data.user.twitter_username}</li>
-               <li style="font-size: 0.6em">Bio: ${data.user.bio}</li>
-                <li>Created: ${new Date(data.created_at).toString().slice(4, 15)}</li>
-                 <li>Number of Likes: ${data.likes}</li>
-             </ul>
-           `;
+          let photographerInfo = `<ul>`;
+          if (data.user.name) {
+            photographerInfo += `<li>Photographer: ${data.user.name}</li>`;
+          }
+          if (data.user.portfolio_url) {
+            photographerInfo += `<li style="font-size: 0.6em">Portfolio: 
+            <a href="${data.user.portfolio_url}" target="_blank">${data.user.portfolio_url}</a></li>`;
+          }
+          if (data.user.location) {
+            photographerInfo += `<li>Home Location: ${data.user.location}</li>`;
+          }
+          if (data.user.twitter_username) {
+            photographerInfo += `<li>Twitter Name: ${data.user.twitter_username}</li>`;
+          }
+          if (data.user.bio) {
+            if (data.user.bio.length > 10) {
+              photographerInfo += `<li style="font-size: 0.6em">Bio: ${data.user.bio}</li>`;
+            }
+          }
+          if (data.user.created_at) {
+            photographerInfo += `<li>Created: ${new Date(data.created_at).toString().slice(4, 15)}</li>`;
+          }
+          if (data.user.likes) {
+            photographerInfo += `<li>Number of Likes: ${data.likes}</li>`;
+          }
+
+          photographerInfo += `</ul>`;
 
           $('#photographer-overlay').html(photographerInfo);
           $('#menu-photographer').on('click', function () {
@@ -53,7 +68,6 @@ export const getCountryImage = (country) => {
           $('#photos-overlay').html(photosOverlayCode);
 
           $('#menu-photos').on('click', function () {
-            //console.log('photos');
             hideAll('photos');
             $('#photos-overlay').toggle();
           });
@@ -79,17 +93,34 @@ export const getCountryImage = (country) => {
                 $('#country-image-title').text(photoData.alt_description);
 
                 let data = photoData;
-                photographerInfo = `
-             <ul>
-               <li>Photographer: ${data.user.name}</li>
-               <li>Portfolio: ${data.user.portfolio_url}</li>
-               <li>Home Location: ${data.user.locatio}</li>
-               <li>Twitter Name: ${data.user.twitter_username}</li>
-               <li style="font-size: 0.6em">Bio: ${data.user.bio}</li>
-                <li>Created: ${new Date(data.created_at).toString().slice(4, 15)}</li>
-                 <li>Number of Likes: ${data.likes}</li>
-             </ul>
-           `;
+
+                photographerInfo = `<ul>`;
+                if (data.user.name) {
+                  photographerInfo += `<li>Photographer: ${data.user.name}</li>`;
+                }
+                if (data.user.portfolio_url) {
+                  photographerInfo += `<li style="font-size: 0.6em">Portfolio: 
+                  <a href="${data.user.portfolio_url}" target="_blank">${data.user.portfolio_url}</a></li>`;
+                }
+                if (data.user.location) {
+                  photographerInfo += `<li>Home Location: ${data.user.location}</li>`;
+                }
+                if (data.user.twitter_username) {
+                  photographerInfo += `<li>Twitter Name: ${data.user.twitter_username}</li>`;
+                }
+                if (data.user.bio) {
+                  if (data.user.bio.length > 10) {
+                    photographerInfo += `<li style="font-size: 0.6em">Bio: ${data.user.bio}</li>`;
+                  }
+                }
+                if (data.user.created_at) {
+                  photographerInfo += `<li>Created: ${new Date(data.created_at).toString().slice(4, 15)}</li>`;
+                }
+                if (data.user.likes) {
+                  photographerInfo += `<li>Number of Likes: ${data.likes}</li>`;
+                }
+
+                photographerInfo += `</ul>`;
 
                 $('#photographer-overlay').html(photographerInfo);
               }

@@ -25,12 +25,13 @@
           />
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="libs/css/loaderstyles.css" />
-    <link rel="stylesheet" type="text/css" href="libs/css/leafletstyles.css" />
     <link rel="stylesheet" type="text/css" href="libs/css/globalstyles.css" />
     <link rel="stylesheet" type="text/css" href="libs/css/modalstyles.css" />
 
     <title>Worldasaurus
     </title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
   </head>
   <body>
     <script id="functions">const setInputVal = (data) => $('#country-search').val(data);
@@ -47,8 +48,6 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
     </script>
-    <script type="text/javascript" src="libs/js/jquery/jQueryInitial.js">
-    </script>
       <script type="module" src="libs/js//jquery/iconControl.js">
     </script>
 
@@ -59,15 +58,10 @@
     
      <script type="module" src="libs/js/missionControl.js">
     </script>
-    <script type="module" src="data/dataControl.js">
-    </script>
+    
      <script type="module" src="libs/js/leafletcode/mappingConstants.js">
     </script> 
     
-    
-  
-
-
     <!-- Leaflet Scripts -->
     <script
             src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -83,10 +77,10 @@
             crossorigin="anonymous"
             >
     </script>
-<!-- Modals -->
+
+    <!-- Modals -->
    <script type="module" src="libs/js/modals/modalControl.js">
     </script>
-        <div class="modal settings-modal" id="settings-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="settings-modal-content"></div></div>
         <div class="modal info-modal" id="info-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="info-modal-content"></div></div>
         <div class="modal map-modal" id="map-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="map-modal-content"></div></div>
         <div class="modal weather-modal" id="weather-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="weather-modal-content"></div></div>
