@@ -12,7 +12,14 @@ export const map = L.map('mapid', {
 
 export const layer = L.geoJSON().addTo(map);
 
+const removeLayers = () => {
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.tileLayer) map.removeLayer(layer);
+  });
+};
+
 const arc = () => {
+  removeLayers();
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution:
       'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -20,6 +27,7 @@ const arc = () => {
 };
 
 const stadia = () => {
+  removeLayers();
   L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
     maxZoom: 20,
     attribution:
@@ -28,6 +36,7 @@ const stadia = () => {
 };
 
 const carto = () => {
+  removeLayers();
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -37,6 +46,7 @@ const carto = () => {
 };
 
 const esri = () => {
+  removeLayers();
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
     maxZoom: 8
@@ -44,6 +54,7 @@ const esri = () => {
 };
 
 const usgs = () => {
+  removeLayers();
   L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 20,
     attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
@@ -51,6 +62,7 @@ const usgs = () => {
 };
 
 const gibs = () => {
+  removeLayers();
   L.tileLayer(
     'https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}',
     {
