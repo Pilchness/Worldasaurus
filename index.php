@@ -81,6 +81,7 @@
     <!-- Modals -->
    <script type="module" src="libs/js/modals/modalControl.js">
     </script>
+        <div class="modal reset-modal" id="reset-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="reset-modal-content"></div></div>
         <div class="modal info-modal" id="info-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="info-modal-content"></div></div>
         <div class="modal map-modal" id="map-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="map-modal-content"></div></div>
         <div class="modal weather-modal" id="weather-modal-main" tabindex="-1" role="dialog" aria-hidden="true"><div id="weather-modal-content"></div></div>

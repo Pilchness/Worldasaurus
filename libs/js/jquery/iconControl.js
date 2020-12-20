@@ -1,5 +1,5 @@
 const closeModals = () => {
-  const modalList = ['info', 'map', 'weather', 'quiz'];
+  const modalList = ['reset', 'info', 'map', 'weather', 'quiz'];
 
   modalList.forEach((modal) => {
     let modalName = `#${modal}-modal-main`;
@@ -14,6 +14,15 @@ const closeModals = () => {
 
 $(document).ready(function () {
   $('#country-search').val('').focus(); //resets input box to empty
+
+  $('#reset-modal-header, #reset').on('click', function (e) {
+    closeModals();
+    $('#reset-modal-main').delay(0).fadeOut('slow');
+    setTimeout(function () {
+      $('#reset-modal-main').modal('toggle');
+    }, 300);
+    e.stopPropagation();
+  });
 
   $('#info-modal-header, #info').on('click', function (e) {
     closeModals();

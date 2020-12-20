@@ -36,7 +36,7 @@ export const detectClickOnCountryName = (targetButton) => {
     for (let j = 0; j < parsedGeoDataArray.length; j++) {
       if (parsedGeoDataArray[j].properties.name === $('#country-search').val()) {
         countryFocus(parsedGeoDataArray[j]);
-        $('#reset').on('click', function () {
+        $('#reset-country').on('click', function () {
           countryFocus(parsedGeoDataArray[j]);
         });
       }
@@ -44,7 +44,7 @@ export const detectClickOnCountryName = (targetButton) => {
   });
 };
 
-const currentLocation = getCurrentNavCords(); //do not remove
+let currentLocation = getCurrentNavCords(); //do not remove
 
 $('#content').html(pageHeader).append(leftMenu);
 
@@ -104,4 +104,9 @@ $('#country-search').on('input', function () {
     )
   );
   detectClickOnCountryName('.dropdown');
+  $('#reset-all').on('click', function () {
+    getCurrentNavCords();
+    //$('#search-suggestions').html('');
+    $('#country-search').val('');
+  });
 });

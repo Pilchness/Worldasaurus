@@ -97,7 +97,8 @@
   display: block;
 }
 
-#info-button-container {
+#info-button-container,
+#reset-button-container {
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
