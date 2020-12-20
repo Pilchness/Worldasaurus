@@ -14,7 +14,8 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
       $('#pois-overlay').html(poiOverlay());
 
       if (response.data.searchResults) {
-        const poiData = response.data.searchResults;
+        //const poiData = response.data.searchResults;
+        const poiData = [...new Set(response.data.searchResults)]; //remove duplicates
         let poiTable = '';
         poiData.map((data) => {
           poiTable += `<tr>
