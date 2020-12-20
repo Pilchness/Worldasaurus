@@ -1,4 +1,5 @@
 import * as mapsource from '../leafletcode/mappingConstants.js';
+const map = mapsource.map;
 
 export const getCities = (countryCode) => {
   $.ajax({
@@ -66,10 +67,10 @@ export const getWeatherData = (cityArray) => {
           cityWeatherTable += `<tr><td>${chooseWeatherSymbol(data.weather[0].description)}</td><td class="table-city">${
             data.name
           }</td><td>${data.wind.speed}</td><td>${Math.round(
-            data.main.temp - 273.15
+            data.main.temp - 273.15 //need to convert temp from K to C
           )}</td><td class="locate-city" value=${data.id} lat=${data.coord.lat} long=${data.coord.lon} name=${
             data.name
-          }>${locateIcon(data.id)}</td></tr>`; //need to convert temp from K to C
+          }>${locateIcon(data.id)}</td></tr>`;
         });
 
         $('#city-weather-table').find('tr:gt(0)').remove();
@@ -86,11 +87,16 @@ export const getWeatherData = (cityArray) => {
           }
         );
 
+        let currentMarker;
+
         $('.locate-city').on('click', function () {
           let cityName = $(this).attr('name');
           let lat = $(this).attr('lat');
           let long = $(this).attr('long');
-          L.marker([lat, long])
+          if (currentMarker != undefined) {
+            map.removeLayer(currentMarker);
+          }
+          currentMarker = L.marker([lat, long])
             .bindTooltip(cityName, {
               permanent: true,
               direction: 'right',
@@ -99,7 +105,7 @@ export const getWeatherData = (cityArray) => {
               opacity: 0.75,
               className: 'city-tooltip'
             })
-            .addTo(mapsource.map);
+            .addTo(map);
         });
       }
     },

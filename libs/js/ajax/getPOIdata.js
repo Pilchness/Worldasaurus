@@ -41,6 +41,7 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
           }
         );
 
+        let currentMarker;
         $('.locate-poi').on('click', function () {
           let poiName = $(this)
             .attr('name')
@@ -51,7 +52,10 @@ export const POIdata = (radius, POIcode, origin, countryBounds) => {
 
           let lat = $(this).attr('lat');
           let long = $(this).attr('long');
-          L.marker([lat, long])
+          if (currentMarker != undefined) {
+            map.removeLayer(currentMarker);
+          }
+          currentMarker = L.marker([lat, long])
             .bindTooltip(poiName, {
               permanent: true,
               direction: 'right',

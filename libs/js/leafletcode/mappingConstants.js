@@ -1,4 +1,5 @@
 //Leaflet Map Initiate
+import { getCurrentNavCords } from './currentLocation.js';
 
 export const map = L.map('mapid', {
   zoomControl: false,
@@ -11,6 +12,14 @@ export const map = L.map('mapid', {
 }).setView([51.505, -0.09], 5);
 
 export const layer = L.geoJSON().addTo(map);
+
+$(document).ready(function () {
+  $('#reset-all').on('click', function () {
+    getCurrentNavCords();
+    $('#country-search').val('');
+    map.removeLayer(layer);
+  });
+});
 
 const removeLayers = () => {
   map.eachLayer(function (layer) {

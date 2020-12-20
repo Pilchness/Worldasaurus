@@ -104,9 +104,4 @@ $('#country-search').on('input', function () {
     )
   );
   detectClickOnCountryName('.dropdown');
-  $('#reset-all').on('click', function () {
-    getCurrentNavCords();
-    //$('#search-suggestions').html('');
-    $('#country-search').val('');
-  });
 });
